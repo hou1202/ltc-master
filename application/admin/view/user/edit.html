@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/king.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingCommon.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">修改{$title}</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+    <form class="layui-form" action="{$loadUrl}">
+        <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">真实姓名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="real_name" value="{$model.real_name}" lay-verify="required" autocomplete="off" placeholder="请输入真实姓名" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">身份证号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="identity_number" value="{$model.identity_number}" autocomplete="off" placeholder="请输入身份证号" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">银行卡号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="bank_number" value="{$model.bank_number}" autocomplete="off" placeholder="请输入银行卡号" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">支行名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="bank_zh_name" value="{$model.bank_zh_name}" autocomplete="off" placeholder="请输入支行名" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">支付宝账号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="alipay_number" value="{$model.alipay_number}" autocomplete="off" placeholder="请输入支付宝账号" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">手机号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.mobile}" readonly autocomplete="off" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">邀请码</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.invitation_code}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">可用资产</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.ky_money}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">固定资产</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.gd_money}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+</form>
+</div>
+<script>
+    var baseText = '<option value="">请选择</option>';
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+        form.on('submit(demo)', function(data) {
+            $.kingAjax(data, "{$urlParam}");
+            return false;
+        });
+        form.on('select(province_id)', function(data) {
+            $.post('/admin/json_type/getCitys', {province_id:data.value}, function(response){
+                var text = '<option value="">请选择城市</option>';
+                for(var i in response.data){
+                    text += '<option value="'+response.data[i].area_id+'">'+response.data[i].name+'</option>';
+                }
+                $('select[name=city_id]').html(text);
+                $('select[name=district_id]').html(baseText);
+                $('select[name=hospital_id]').html(baseText);
+                $('select[name=department_id]').html(baseText);
+                form.render('select');
+            });
+
+        });
+        form.on('select(city_id)', function(data) {
+            $.post('/admin/json_type/getDistricts', {city_id:data.value}, function(response){
+                var text = '<option value="">请选择区、县</option><option value="0">市区</option>';
+                for(var i in response.data){
+                    text += '<option value="'+response.data[i].area_id+'">'+response.data[i].name+'</option>';
+                }
+                $('select[name=district_id]').html(text);
+                $('select[name=hospital_id]').html(baseText);
+                $('select[name=department_id]').html(baseText);
+                form.render('select');
+            });
+        });
+        form.on('select(district_id)', function(data) {
+            $.post('/admin/json_type/getHospitals', {city_id:$('select[name=city_id]').val(),district_id:data.value}, function(response){
+                var text = '<option value="">请选择医院</option>';
+                for(var i in response.data){
+                    text += '<option value="'+response.data[i].hospital_id+'">'+response.data[i].hospital_name+'</option>';
+                }
+                $('select[name=hospital_id]').html(text);
+                $('select[name=department_id]').html(baseText);
+                form.render('select');
+            });
+        });
+        form.on('select(hospital_id)', function(data) {
+            $.post('/admin/json_type/getDepartments', {hospital_id:data.value}, function(response){
+                var text = '<option value="">请选择科室</option>';
+                for(var i in response.data){
+                    text += '<option value="'+response.data[i].department_id+'">'+response.data[i].department_name+'</option>';
+                }
+                $('select[name=department_id]').html(text);
+                form.render('select');
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

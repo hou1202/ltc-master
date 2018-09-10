@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>收款详情</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/selllist.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+    <style>
+        .inputContent {
+            flex-grow: 1;
+            font-size:100%;
+            border:none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>收款详情</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/buy/trade">
+            出售
+        </a>
+        <a href="/index/buy/buy">
+            购买
+        </a>
+        <a href="/index/buy/tradelist">
+            交易列表
+        </a>
+        <a href="/index/buy/buylist">
+            收款明细
+        </a>
+        <a href="/index/buy/remit">
+            汇款明细
+        </a>
+    </div>
+    <div class="list-content">
+        <ul class="userinfo">
+            <li>
+                <p>买家编号</p>
+                <p>{$maijia['vip_number']}</p>
+            </li>
+            <li>
+                <p>买家姓名</p>
+                <p>{$maijia['real_name']}</p>
+            </li>
+            <li>
+                <p>买家电话</p>
+                <p>{$maijia['mobile']}</p>
+            </li>
+            <li>
+                <p>购买数量</p>
+                <p>{$order['count']}</p>
+            </li>
+            <li>
+                <p>LTC价格</p>
+                <p>{$order['price']}</p>
+            </li>
+            <li>
+                <p>交易总价</p>
+                <p>{$order['total_price']}</p>
+            </li>
+            <li>
+                <p>手续费</p>
+                <p>{$order['other_count']}</p>
+            </li>
+            {if condition="$order['status'] == 2"}
+            <li>
+                <p>交易计时</p>
+                <p>{$time}</p>
+            </li>
+            <li>
+                <p>汇款状态</p>
+                <p>待汇款</p>
+            </li>
+            {/if}
+            {if condition="$order['status'] == 3"}
+            <li>
+                <p>交易计时</p>
+                <p>{$jyTime}</p>
+            </li>
+            <li>
+                <p>汇款状态</p>
+                <p>已汇款</p>
+            </li>
+            {/if}
+            <li>
+                <p>交易状态</p>
+                <p>{$status[$order['status']]}</p>
+            </li>
+            {if condition="$order['status'] == 3"}
+            <li>
+                <p>交易密码</p>
+                <input class="inputContent" type="password" id="password" />
+            </li>
+            {/if}
+        </ul>
+        {if condition="$order['status'] == 3"}
+        <div class="sub">
+            <button id="huikuan" class="btn" type="submit">确认收款</button>
+        </div>
+        {/if}
+    </div>
+    <input type="hidden" id="id" value="{$order['id']}">
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    var commitObj = {isCommit:false,url:'/index/buy/shoukuan',data:{password:'',id:0}};
+    $('#huikuan').click(function(){
+        var password = $('#password').val();
+        if(password == '') {
+            alertMsg('交易密码不能为空');return;
+        }
+        commitObj.data.password = password;
+        commitObj.data.id = $('#id').val();
+        $.kingAjax(commitObj, function(){
+            location.reload();
+        })
+    })
+</script>
+</html>

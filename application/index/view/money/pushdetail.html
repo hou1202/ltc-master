@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提币详情</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/pulldetail.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>提币详情</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/money/apply">
+            提币申请
+        </a>
+        <a href="/index/money/pulladdress">
+            充币地址
+        </a>
+        <a href="/index/money/push">
+            提币明细
+        </a>
+        <a href="/index/money/pull">
+            充币明细
+        </a>
+    </div>
+    <div class="list-content">
+        <ul class="userinfo">
+            <li>
+                <p>会员编号</p>
+                <p>{$user['vip_number']}</p>
+            </li>
+            <li>
+                <p>联系方式</p>
+                <p>{$user['mobile']}</p>
+            </li>
+            <li>
+                <p>提币数量</p>
+                <p>{$tb['count']}</p>
+            </li>
+            <li>
+                <p>手续费</p>
+                <p>{$tb['sxf_money']}</p>
+            </li>
+            <li>
+                <p>到账数量</p>
+                <p>{$tb['sj_money']}</p>
+            </li>
+            <li>
+                <p>提币平台</p>
+                <p>{$tbName}</p>
+            </li>
+            <li>
+                <p>提币地址</p>
+                <p>{$tb['address']}</p>
+            </li>
+            <li>
+                <p>Payment ID</p>
+                <p>{$tb['payment_id']}</p>
+            </li>
+            <li>
+                <p>提币时间</p>
+                <p>{$tb['c_time']}</p>
+            </li>
+            <li>
+                <p>提币状态</p>
+                <p>{$status[$tb['status']]}</p>
+            </li>
+        </ul>
+        <input type="hidden" id="id" value="{$tb['id']}">
+        <div class="sub">
+            {if condition="$tb['status'] == 1"}
+            <button class="btn" id="cancel" type="button">取消</button>
+            {/if}
+        </div>
+    </div>
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    var commitObj = {isCommit:false,url:'/index/money/cancel',data:{id:$('#id').val()}};
+    $('#cancel').click(function(){
+        $.kingAjax(commitObj);
+    })
+</script>
+
+</html>

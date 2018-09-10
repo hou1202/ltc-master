@@ -1,0 +1,33 @@
+{foreach name='imageSize' item='i'}
+<div class="layui-form-item">
+    <div class="layui-row">
+        <div class="layui-col-md1">
+            <label class="king-label">{$i.name}</label>
+        </div>
+        <div class="layui-col-md11">
+            <input type="hidden" name="{$key}" value="{$model[$key]}">
+            <div id="{$key}" class="img-box">
+                {php} $values = $model->getFiles($key); if(!empty($values)){ foreach($values as $k=>$v){ {/php}
+                <section class="up-section" style="width: {$i.width}px;height: {$i.height}px;">
+                    <img class="up-img" src="{$v['url']}" data-id="{$v['id']}">
+                    <a href="javascript:void(0)">
+                        <input type="text" name="{$key}File[]" value="1" id="{$key}File{$k+1}"><img class="close-upimg" src="/static/admin/images/a7.png"><span class="up-span"></span>
+                    </a>
+                    <span class="up-span-short">尺寸：{$i.width}*{$i.height}</span>
+                </section>
+                {php} }} {/php}
+                {php} if(count($values)<$i['limit']){ {/php}
+                <section class="up-section" style="width: {$i.width}px;height: {$i.height}px;">
+                    <img class="up-img" src="/static/admin/images/a11.png">
+                    <a href="javascript:void(0)"><input type="file" name="{$key}File[]" id="{$key}File1"></a>
+                    <span class="up-span-short">尺寸：{$i.width}*{$i.height}</span>
+                </section>
+                {php} } {/php}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    setFileUpload('{$tableName}', '{$key}', {$i.limit}, {$i.width}, {$i.height}, {$model[$primaryKey]});
+</script>
+{/foreach}

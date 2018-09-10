@@ -1,0 +1,22 @@
+{foreach name='imageSize' item='i'}
+<div class="layui-form-item">
+    <div class="layui-row">
+        <div class="layui-col-md1">
+            <label class="king-label">{$i.name}</label>
+        </div>
+        <div class="layui-col-md11">
+            <input type="hidden" name="{$key}" value="">
+            <div id="{$key}" class="img-box">
+                <section class="up-section" style="width: {$i.width}px;height: {$i.height}px;">
+                    <img class="up-img" src="/static/admin/images/a11.png">
+                    <a href="javascript:void(0)"><input type="file" name="{$key}File[]" id="{$key}File1"></a>
+                    <span class="up-span-short">尺寸：{$i.width}*{$i.height}</span>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    setFileUpload('{$tableName}', '{$key}', {$i.limit}, {$i.width}, {$i.height}, 0);
+</script>
+{/foreach}

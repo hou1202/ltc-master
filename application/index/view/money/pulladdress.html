@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>充币地址</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/pulladress.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>充币地址</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/money/apply">
+            提币申请
+        </a>
+        <a href="javascript:void(0)">
+            充币地址
+        </a>
+        <a href="/index/money/push">
+            提币明细
+        </a>
+        <a href="/index/money/pull">
+            充币明细
+        </a>
+    </div>
+    <div class="list-content">
+        <form class="sub-box">
+            <div class="">
+                <p>会员编号</p>
+                <p>{$user['vip_number']}</p>
+            </div>
+            <div class="">
+                <p>手机号码</p>
+                <p>{$user['mobile']}</p>
+            </div>
+            <div class="">
+                <p>可用资产</p>
+                <p>{$user['ky_money']}</p>
+            </div>
+            <div class="">
+                <p>锁仓资产</p>
+                <p>{$user['gd_money']}</p>
+            </div>
+            <div class="input-box">
+                <p>
+                    充币地址
+                </p>
+                <textarea readonly id="address" placeholder="你的充币地址">{$scAddress}</textarea>
+            </div>
+        </form>
+        <div class="sub">
+            <button id="commit" class="btn" type="button">{$btnTxt}</button>
+        </div>
+        <div class="info">
+            <ul>
+                <li>
+                    充币说明
+                </li>
+                <li>
+                    1.外网充币建议使用比特尔，将您的LTC转入该地址。
+                </li>
+                <li>
+                    2.外网充币后至充币明细内提交充币记录，填写外网的交易ID以及充币数量，不提交的视为自动放弃充币。
+                </li>
+                <li>
+                    3.平台一律禁止虚假充值，发现直接将作封号处理。
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 底部开始 -->
+    <div class="bottom-content">
+
+    </div>
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    function copyText() {
+        var text = document.getElementById("address");
+        text.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令  
+    }
+    var commitObj = {isCommit:false, url:'/index/money/addAddress'};
+    $("#commit").on("click", function() {
+        if ($(this).html() == '获取充币地址') {
+            $.kingAjax(commitObj,function(res){
+                var address = res.data.address;
+                $("#address").val(address);
+                $(".btn").html("一键复制地址");
+                copyText();
+                alertMsg('复制成功');
+            })
+        } else {
+            copyText();
+            alertMsg('复制成功');
+        }
+    });
+
+    
+</script>
+
+</html>

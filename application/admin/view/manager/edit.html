@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">修改{$title}</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+
+    <form class="layui-form" action="{$loadUrl}">
+        <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">登录名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="username" lay-verify="alphnum" autocomplete="off" placeholder="请输入登录名" class="layui-input" maxlength="20" value="{$model.username}">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">真实姓名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="real_name" lay-verify="required" autocomplete="off" placeholder="请输入真实姓名" class="layui-input" maxlength="50" value="{$model.real_name}">
+                </div>
+            </div>
+        </div>
+
+        {include file='default/image_edit'}
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">密码</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input" maxlength="20">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">角色</label>
+                </div>
+                <div class="layui-col-md5">
+                    <select name="role_id" lay-verify="required">
+                        <option value=" ">请选择一个角色</option>
+                        {foreach name="roles" item="v"}
+                            <option value="{$v.id}" {if condition="$v.id == $model.role_id"}selected{/if}>{$v.rolename}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">状态</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|禁用" value="1" {if condition="$model.status == 1"}checked{/if}>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            alphnum:  function(value){
+                if(value == ''){
+                    return '登录名不能为空';
+                }
+                if(!/^[0-9a-zA-Z]*$/.test(value)){
+                    return '登录名只能是数字和字母';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(demo)', function(data) {
+            $.kingAjax(data, "{$urlParam}");
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+.back-content {
+  background: url("../image/back.gif") repeat-x;
+  background-size: 100%;
+}
+.top-content {
+  text-align: center;
+  color: #ffffff;
+}
+.top-content .number {
+  color: #ffffff;
+  font-size: 0.93333333rem;
+  padding-top: 0.8rem;
+}
+.top-content p {
+  font-size: 0.42666667rem;
+  margin-top: 0.4rem;
+  padding-bottom: 0.66666667rem;
+}
+.item-content {
+  border-top: 0.13333333rem solid #f5f5f5;
+}
+.item-content .item {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.4rem;
+  height: 1.2rem;
+  line-height: 1.06666667rem;
+  font-size: 0.4rem;
+  border-top: 0.13333333rem solid #f5f5f5;
+  background: #ffffff;
+}
+body {
+  background: #f5f5f5;
+}

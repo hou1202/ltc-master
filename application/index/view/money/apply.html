@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提币申请</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/apply.css?v=1">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>提币申请</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            提币申请
+        </a>
+        <a href="/index/money/pulladdress">
+            充币地址
+        </a>
+        <a href="/index/money/push">
+            提币明细
+        </a>
+        <a href="/index/money/pull">
+            充币明细
+        </a>
+    </div>
+        <div class="user-item">
+            <img src="{$user['poster']}" alt="">
+            <div class="user-text">
+                <p>{$user['vip_number']}</p>
+                <P>{$user['mobile']}</P>
+            </div>
+        </div>
+        <div class="price-content">
+            <div class="price-item">
+                <p>
+                    可用资产
+                </p>
+                <p class="default" id="kyMoney">
+                    {$user['ky_money']}
+                </p>
+            </div>
+            <div class="price-item">
+                <p>
+                    锁仓资产
+                </p>
+                <p>
+                   {$user['gd_money']}
+                </p>
+            </div>
+        </div>
+        <form id="commitForm" class="form-box">
+            <input type="hidden" name="mobile" id="mobile" value="{$user['mobile']}">
+            <div class="input-item">
+                <p>
+                    提币平台
+                </p>
+                <div class="selcet-box">
+                    <img src="/static/index/image/bottom.png" alt="">
+                    <select name="b_id">
+                        {foreach name="b" item="i"}
+                        <option value ="{$i['id']}">{$i['name']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="input-item">
+                <p>
+                    提币数量
+                </p>
+                <input id="count" name="count" type="text" placeholder="数量为不大于可用资产的整数">
+            </div>
+            <div class="input-text">
+                手续费： <span id="sxf" class="default">00.00 </span> (实际到账金额：<span id="dzje" class="default">00.00</span>)
+            </div>
+            <div class="input-box">
+                <p>
+                    提币地址
+                </p>
+                <textarea name="address" placeholder="你在提币平台的地址"></textarea>
+            </div>
+            <div class="input-item">
+                <p>
+                    Payment ID
+                </p>
+                <input type="text" name="payment_id" placeholder="提币平台Payment ID(可不填)">
+            </div>
+            <div class="input-item">
+                <p>
+                    验证码
+                </p>
+                <input class="vat" name="verify" type="text" placeholder="请输入验证码">
+                <a id="verifyA" href="javascript:;" class="get-qr">获取验证码</a>
+            </div>
+            <div class="input-item">
+                <p>
+                    交易密码
+                </p>
+                <input name="password" type="password" placeholder="请输入交易密码">
+            </div>
+            <div class="sub">
+                {if condition="$isOpen>0"}
+                <button id="commit" class="btn" type="button">确认提币</button>
+                {/if}
+            </div>
+            </form>
+            <div class="info">
+                <ul>
+                    <li>
+                        注意事项
+                    </li>
+                    <li>
+                        1.请确保提币地址与对应的平台一致
+                    </li>
+                    <li>
+                        2.提币审核通过后不能退回
+                    </li>
+                    <li>
+                        3.提币审核通过后4小时内到对应地址
+                    </li>
+                </ul>
+            </div>
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    
+
+    function accMul(arg1, arg2) {
+        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+        try {
+            m += s1.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        try {
+            m += s2.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+    }
+    function accSub(arg1, arg2) {
+        var r1, r2, m, n;
+        try {
+            r1 = arg1.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r1 = 0;
+        }
+        try {
+            r2 = arg2.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r2 = 0;
+        }
+        m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
+        n = (r1 >= r2) ? r1 : r2;
+        return ((arg1 * m - arg2 * m) / m).toFixed(n);
+    }
+    var kyMoney = parseInt($('#kyMoney').html());
+    $("#count").keyup(function(){
+        var c=$(this);
+        var temp_amount=c.val().replace(/[^\d]/g,'');
+        if(temp_amount!='') {
+            temp_amount = parseInt(temp_amount);
+            if(temp_amount>kyMoney){
+                temp_amount = kyMoney;
+            }
+            console.log(accMul(temp_amount, 0.05));
+            $('#sxf').html(accMul(temp_amount, 0.05));
+            $('#dzje').html(accMul(temp_amount, 0.95));
+        }else{
+            $('#sxf').html('00.00');
+            $('#dzje').html('00.00');
+        }
+        $(this).val(temp_amount);
+    })
+    var commitObj = {isCommit:false, url:'/index/money/addApply', data:''};
+    $("#commit").click(function(){
+        var count = $('#count').val();
+        if(count == '') {
+            alertMsg('数量不能为空');return;
+        }
+        var re = /^[1-9]+[0-9]*]*$/;
+        if (!re.test(count)) {
+            alertMsg('数量为大于0的整数');return;
+        }
+        commitObj.data = $('#commitForm').serialize();
+        $.kingAjax(commitObj);
+    });
+    var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
+    $('#verifyA').click(function(){
+        verifyObj.data = {mobile:$('#mobile').val(), type:1, captcha:'ltc_captcha'};
+        getVerify('#verifyA', verifyObj);
+    });
+</script>
+
+</html>

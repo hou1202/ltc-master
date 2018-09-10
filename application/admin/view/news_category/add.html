@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">添加{$title}</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+    <form class="layui-form" action="{$loadUrl}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">文章分类名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="category_name" lay-verify="required" autocomplete="off" placeholder="请输入文章分类名" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">排序</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="number" name="sort" value="0" lay-verify="required" autocomplete="off" placeholder="请输入排序" class="layui-input" maxlength="8">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+        form.on('submit(demo)', function(data) {
+            $.kingAjax(data);
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

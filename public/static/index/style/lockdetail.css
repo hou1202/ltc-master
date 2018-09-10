@@ -1,0 +1,206 @@
+div.list-title {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 0.8rem;
+  line-height: 0.77333333rem;
+  padding: 0 0.4rem;
+  margin-top: 0.4rem;
+}
+div.list-title a {
+  flex-grow: 1;
+  color: #216ea8;
+  text-align: center;
+  font-size: 0.4rem;
+  border: 1px solid;
+}
+div.list-title a:first-child {
+  border-radius: 0.13333333rem 0 0 0.13333333rem;
+}
+div.list-title a:last-child {
+  border-radius: 0 0.13333333rem 0.13333333rem 0;
+}
+div.list-title a:nth-child(1) {
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #216ea8;
+  border-bottom: 1px solid #216ea8;
+  color: #ffffff;
+  background: #216ea8;
+}
+div.price {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  height: 4.45333333rem;
+  overflow: hidden;
+}
+div.price .circle {
+  width: 6.02666667rem;
+  height: 6.02666667rem;
+  border: 2px solid #216ea8;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: 2.66666667rem;
+  background: #f3faff;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+div.price .circle div {
+  width: 100%;
+  line-height: 0.66666667rem;
+  margin-top: 0.33333333rem;
+  font-size: 0.4rem;
+}
+div.price .circle div p:first-child {
+  color: #999999;
+}
+div.price .circle div p:last-child {
+  color: #216ea8;
+}
+div.price .circle div:first-child {
+  margin-top: 0.53333333rem;
+}
+div.price .circle div:last-child p:last-child {
+  font-size: 0.48rem;
+}
+.item {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 0 0.4rem;
+  align-items: center;
+  height: 1.2rem;
+  line-height: 1.06666667rem;
+  font-size: 0.4rem;
+  border-top: 0.13333333rem solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+  color: #808080;
+}
+.item input {
+  flex-grow: 1;
+  padding-left: 1.26666667rem;
+  border: none;
+  outline: none;
+}
+.list {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-start;
+  padding: 0 0.4rem;
+  height: 0.93333333rem;
+  font-size: 0.4rem;
+  line-height: 0.93333333rem;
+  background: #f5f5f5;
+  color: #808080;
+}
+.list p:last-child {
+  color: #216ea8;
+  margin-left: 0.4rem;
+}
+.cate {
+  width: 100%;
+  height: 1.06666667rem;
+  font-size: 0.4rem;
+  line-height: 1.06666667rem;
+  padding: 0 0.4rem;
+  border-bottom: 1px solid #f5f5f5;
+}
+.box {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.26666667rem 0;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+.box select{
+  width:100%;
+  height:1rem;
+  padding:0 0.8rem;
+  border:none;
+  background:url("/static/index/image/bottom.png") no-repeat;
+  background-position: right;
+
+
+}
+.box select option{
+  width:100%;
+}
+.rad-box {
+  width: 2.4rem;
+  height: 2.13333333rem;
+  text-align: center;
+  background-size: 100%;
+  position: relative;
+}
+.rad-box .rad-test {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.4rem;
+  padding: 0.26666667rem 0;
+}
+.rad-box .rad-test p:nth-child(2) {
+  color: #ff3939;
+}
+.rad-box .rad-test p:nth-child(2) span {
+  font-size: 0.32rem;
+}
+.rad-box .rad-test p:nth-child(3) {
+  color: #808080;
+}
+.rad-box input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+:-ms-input-placeholder {
+  text-align: right;
+}
+::-webkit-input-placeholder {
+  text-align: right;
+}
+.sub {
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.4rem;
+  margin-top: 0.4rem;
+}
+.sub a {
+  flex-grow: 1;
+  height: 1.28rem;
+  font-size: 0.42666667rem;
+  color: #ffffff;
+  background: #216ea8;
+  line-height: 1.28rem;
+  text-align: center;
+  border-radius: 0.13333333rem;
+}
+#main {
+  width: 100%;
+  padding: 0 0.4rem;
+  height: 8rem;
+}

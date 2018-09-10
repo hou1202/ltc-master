@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>{$message.title}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
+    <style>
+        .head{
+            width:100%;
+            font-size: 20px;
+            text-align: center;
+        }
+        .content{
+            margin-top:20px;
+            margin-bottom:20px;
+            text-indent:2em;
+        }
+        .foot{
+            float:right;
+        }
+    </style>
+</head>
+<body>
+<div class="head">
+    {$message.title}
+</div>
+<div class="content">
+    {$message.content}
+</div>
+<div class="foot">
+    {$message.c_time}
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.layui-elem-quote.query-index{
+    margin: 10px 20px;
+}
+.layui-elem-field.index-content{
+    margin: 0 20px;
+}
+.index-box{
+    margin: 0 20px;
+}
+.sex-w{
+    color: #ff5e5e;
+}
+.sex-m{
+    color: #468efb;
+}
+td img{
+    max-width: 300px;
+}

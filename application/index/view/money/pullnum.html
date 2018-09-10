@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>充币明细</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/pull.css">
+    <link rel="stylesheet" href="/static/index/style/pullnum.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>充币明细</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/money/apply">
+            提币申请
+        </a>
+        <a href="/index/money/pulladdress">
+            充币地址
+        </a>
+        <a href="/index/money/push">
+            提币明细
+        </a>
+        <a href="/index/money/pull">
+            充币明细
+        </a>
+    </div>
+    <div class="list-content">
+        <ul class="userinfo">
+            <li class="payId">
+                <p>交易ID</p>
+                <textarea id="jyid" class="payContent"></textarea>
+            </li>
+            <li>
+                <p>充币数量</p>
+                <input id="count" maxlength="10" class="inputContent" type="text" />
+            </li>
+        </ul>
+        <div class="sub">
+            <button id="commit" class="btn" type="button">提交充币记录</button>
+        </div>
+    </div>
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    var commitObj = {isCommit:false,url:'/index/money/addCB',data:{jyid:'',count:0}};
+    $('#commit').click(function(){
+        var jyid = $('#jyid').val();
+        var count = $('#count').val();
+        if(jyid == '') {
+            alertMsg('交易ID不能为空');return;
+        }
+        if(count == '') {
+            alertMsg('数量不能为空');return;
+        }
+        var re = /^[1-9]+[0-9]*]*$/;
+         if (!re.test(count)) {
+             alertMsg('数量为大于0的整数');return;
+         }
+         commitObj.data.jyid = jyid;
+         commitObj.data.count = count;
+        $.kingAjax(commitObj);
+    })
+</script>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>留言反馈</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/message1.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    <link rel="stylesheet" href="/static/index/style/returnlist.css">
+    <link rel="stylesheet" href="/static/index/style/fankui.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>反馈留言</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            反馈留言
+        </a>
+        <a href="/index/msg/index">
+            留言记录
+        </a>
+        <a href="/index/index/about">
+            关于LTC
+        </a>
+        <a href="/index/news/index">
+            新闻中心
+        </a>
+    </div>
+    <div class="content" style="margin-top:10px;">
+        <form id="commitInfo">
+            <div class="text-box">
+                <textarea name="content" placeholder="请输入问题的描述信息"></textarea>
+            </div>
+            <div class="image-box" style="margin-top: 30px;">
+                <div class="file-box">
+                    <div class="img-box">
+                        <input type="file" accept="image/*" onchange="showImage(this)">
+                    </div>
+                </div>
+            </div>
+            <div class="sub" style="border-bottom:none">
+                <button class="btn" type="button">提交反馈内容</button>
+            </div>
+            <input type="hidden" id="images" name="images" value="">
+        </form>
+    </div>
+</body>
+<script>
+    
+    var fileBox = document.querySelector(".file-box");
+    function showImage(obj) {
+        var imgNum = fileBox.getElementsByTagName("img");
+        var file = obj.files[0];
+        var imgBox = document.createElement("img");
+        fileBox.insertBefore(imgBox, obj.parentNode);
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            imgBox.src = e.target.result;
+        }
+        if (imgNum.length == 3) {
+            obj.style.display = "none";
+        }
+        uploadFile(file, 'p_kefu', 'images', 0, function(res){
+            var imagesTxt = $('#images').val();
+            if(imagesTxt == ''){
+                var imagesArr = [res.data.url];
+            }else {
+                var imagesArr = imagesTxt.split(',');
+                imagesArr[imagesArr.length] = res.data.url;
+            }
+            $('#images').val(imagesArr.join(','));
+        });
+    }
+    var commitObj = {isCommit:false,url:'/index/msg/commit',data:''};
+    $('.btn').click(function(){
+        commitObj.data = $('#commitInfo').serialize();
+        $.kingAjax(commitObj);
+    });
+</script>
+
+</html>

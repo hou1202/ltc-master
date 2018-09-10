@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>{$news.title}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link type="text/css" rel="stylesheet" href="/static/api/css/newsdetail_3.css"/>
+</head>
+<body>
+<div class="title">
+    {$news.title}
+</div>
+<div class="click">
+    <div>
+    <img src="/static/api/images/eye.png" width="16" alt=""><span>{$news.click_count}</span>
+    </div>
+    <p>{$news.c_time}</p>
+</div>
+<div class="content">
+    {$news.content}
+</div>
+</body>
+</html>

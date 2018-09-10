@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testcall</title>
+    <script type="text/javascript" src="http://devcdn.ainemo.com/page/js/base64.js"></script>
+</head>
+<body>
+    <button onclick="onCallNemoNumber('188188', '客服小鱼')">呼叫小鱼号</button>
+    <button onclick="onCallPstn('10086', '中国移动')">呼叫中国移动</button>
+    <button onclick="onPlay()">播放视频</button>
+    <button onclick="onReturn()">返回</button>
+
+    <script type="text/javascript">
+        function onCallNemoNumber(nemoNumber, displayName) {
+            //呼叫小鱼号
+            window.location = 'ainemo-call://nemoaction?nemoNumber=' + nemoNumber + '&displayName=' + displayName;
+        }
+
+        function onCallPstn(number, displayName) {
+            //呼叫pstn
+            window.location = "ainemo-pstncall://" + number + "?displayName=" + displayName;
+        }
+
+        function onReturn() {
+            //返回小鱼应用列表
+            window.location="ainemo-close://closePage";
+        }
+
+        function callEnd(callinfo) {
+            //呼叫结束时小鱼调这个函数通知页面
+        }
+
+        function onPlay() {
+            location.href = "ainemo-vod://"+ BASE64.encoder('http://devcdn.ainemo.com/static/company_profile.compressed.mp4');
+        }
+    </script>
+</body>
+</html>

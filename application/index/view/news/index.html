@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新闻中心</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/returnlist.css">
+    <link rel="stylesheet" href="/static/index/style/returnnew.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>新闻中心</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/msg/add">
+            反馈留言
+        </a>
+        <a href="/index/msg/index">
+            留言记录
+        </a>
+        <a href="/index/index/about">
+            关于LTC
+        </a>
+        <a href="/index/news/index">
+                新闻中心
+            </a>
+    </div>
+    <!-- 锁仓列表开始 -->
+    <div class="list-content">
+        <ul class="top-title">
+            <li>标题</li>
+            <li>时间</li>
+            <li>操作</li>
+        </ul>
+        {foreach name="newses" item="v"}
+        <ul class="list-item">
+            <li>
+                {$v['title']}
+            </li>
+            <li>{$v['c_time']}</li>
+            <li>
+                <a href="/index/news/detail/id/{$v['news_id']}">
+                        查看
+                    </a>
+            </li>
+        </ul>
+        {/foreach}
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    
+</script>
+
+</html>

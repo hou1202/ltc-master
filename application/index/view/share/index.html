@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分享列表</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/share.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a href="/index/index/index">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>分享列表</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            分享好友
+        </a>
+        <a href="/index/share/income">
+            分享收益
+        </a>
+        <a href="/index/share/members">
+            分享列表
+        </a>
+    </div>
+    <!-- 锁仓列表开始 -->
+    <div class="top-yao">
+        <div class="yao">
+            <p>
+                我的分享码
+            </p>
+            <p>
+                {$user['invitation_code']}
+            </p>
+        </div>
+    </div>
+    <div class="qr-content">
+        <div class="qr-box">
+            <img src="{$qrcode}" alt="">
+            <p>
+                邀请好友扫码注册
+            </p>
+        </div>
+    </div>
+    <div class="android">
+        <a href="/ltc-1.0.1.apk">
+            下载安卓版
+        </a>
+    </div>
+    <div class="ios">
+        <a href="/index/index/ios">
+                下载IOS版
+            </a>
+    </div>
+    <div class="info">
+        <p>
+            邀请返利规则说明
+        </p>
+        <ul>
+            <li>
+            1.活动期间根据推荐会员锁仓情况获取锁仓会员利息15%佣金，后续将根据实际情况对佣金比例进行调整；
+            </li><li>
+            2.您分享的会员进行锁仓，佣金就会每天返到您的帐户可用资产内；
+        </li><li>
+            3.我们保留对返佣规则进行调整的权利，但是对您推荐好友数量没有限制；
+        </li><li>
+            4.推荐的会员必须填写您的分享码注册才算你的有效返佣会员；
+        </li><li>
+            5.我们将会严查虚假账户，一经发现永久封号处理；
+        </li><li>
+            6.新注册会员赠送30天免费签到奖励；
+        </li><li>
+
+
+            最终解释权归LTC锁仓计划运营团队
+        </li>
+        </ul>
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="javascript:;">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+</html>

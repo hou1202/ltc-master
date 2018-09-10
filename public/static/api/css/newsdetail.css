@@ -1,0 +1,47 @@
+body{
+    width: 100%;
+    margin: 0;
+}
+.head{
+    position: relative;
+}
+.head img{
+    width: 100%;
+    display: block;
+}
+.head .date{
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+}
+.head span{
+    text-align: center;
+    line-height:60px;
+    color: #fff;
+    font-size: 18px;
+    width: auto;
+}
+.head .date span.time{
+    float: right;
+    margin-right: 20px;
+}
+.head .date span.author{
+    float: left;
+    margin-left: 20px;
+}
+.title{
+    display: inline-block;
+    width: 100%;
+    line-height: 50px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+.content{
+    margin-top:0px;
+}
+.content img{
+    width: 100%;
+}

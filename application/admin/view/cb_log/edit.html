@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">修改{$title}</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+    <form class="layui-form" action="{$loadUrl}">
+        <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">充币人</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.real_name}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">充币人电话</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.mobile}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">充币地址</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$address.content}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">充币数量</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.count}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">备注</label>
+                </div>
+                <div class="layui-col-md5">
+                    <textarea name="remark" placeholder="请输入备注" class="layui-textarea">{$model.remark}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">状态</label>
+                </div>
+                <div class="layui-col-md5">
+                    <select name="status">
+                        <option value="1" {if condition="$model['status'] == 1"} selected{/if}>待审核</option>
+                        <option value="2" {if condition="$model['status'] == 2"} selected{/if}>已通过</option>
+                        <option value="3" {if condition="$model['status'] == 3"} selected{/if}>已驳回</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="status" value="{$model['status']}">
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+        form.on('submit(demo)', function(data) {
+            if(parseInt($('#status').val()) == 2) {
+                layer.alert('已通过的状态不支持修改！',{icon:2});
+                return false;
+            }
+            if(data.field.status == '1'){
+                layer.alert('状态不能调整为待审核',{icon:2});
+                return false;
+            }
+            if(data.field.status == '2'){
+                layer.confirm('通过操作不可逆，请确认后再操作！',  {icon: 3, title:'提示'}, function(){
+                    $.kingAjax(data, "{$urlParam}");
+                });
+                return false;
+            }
+
+            if(data.field.status == '3'){
+                layer.confirm('确定驳回请求？',  {icon: 3, title:'提示'}, function(){
+                    $.kingAjax(data, "{$urlParam}");
+                });
+                return false;
+            }
+
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

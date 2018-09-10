@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/index/style/register.css">
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header>
+        <div>
+            登录
+        </div>
+    </header>
+    <div class="content">
+        <form id="loginForm">
+            <div class="input-box">
+                <input name="mobile" type="text" placeholder="请输入注册手机号">
+            </div>
+            <div class="input-box">
+                <input name="password" type="password" placeholder="请输入用户密码">
+            </div>
+
+            <div class="register">
+                <input id="loginBtn" type="button" value="登录">
+            </div>
+            <div class="login login2">
+                <input id="regBtn" type="button" value="注册">
+            </div>
+            <div class="login login2" style="float:right;">
+                <input id="forgetBtn" type="button" value="忘记密码">
+            </div>
+        </form>
+    </div>
+    <div class="bottom-content">
+
+    </div>
+</body>
+<script>
+    $("#regBtn").click(function(){
+        location.href = '/index/index/register';
+    })
+    $("#forgetBtn").click(function(){
+        location.href = '/index/user/forgetpass';
+    })
+    var loginObj = {isCommit:false, url:'/index/user/login', data:''};
+    $("#loginBtn").click(function(){
+        loginObj.data = $('#loginForm').serialize();
+        $.kingAjax(loginObj);
+    })
+</script>
+</html>

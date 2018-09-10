@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>锁仓计划</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/lockdetail.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+    <style>
+        .rad-box.current{
+            background:url(/static/index/image/xuan_03.png) no-repeat;background-size:100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="public">
+        <a href="/index/index/index">
+            <img src="/static/index/image/arrow.gif">
+        </a>
+        <h1>锁仓计划</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            锁仓计划
+        </a>
+        <a href="/index/lock_order/orders">
+            锁仓明细
+        </a>
+        <a href="/index/lock_order/lockdeal">
+            最新成交
+        </a>
+    </div>
+    <div class="price">
+        <div class="circle">
+            <div>
+                <p>固定LTC</p>
+                <p>{$user['gd_money']}</p>
+            </div>
+            <div>
+                <p>可用LTC</p>
+                <p>{$user['ky_money']}</p>
+            </div>
+        </div>
+    </div>
+    <!-- 锁仓列表开始 -->
+    <div class="list-content">
+        <div class="item">
+            <p>锁仓份额</p>
+            <input id="scCount" type="text" placeholder="不大于50的可用LTC数量整数" maxlength="2">
+        </div>
+        <!--<div class="list">
+            <p>
+                剩余份额
+            </p>
+            <p id="syCount">{$selBox['sy_count']}</p>
+        </div>-->
+        <div class="cate">
+            锁仓类型
+        </div>
+        <div class="box">
+            <select>
+                <option value ="volvo">Volvo这是一个很长很长的理财计划，需要发好的真假 一起来我们</option>
+                <option value ="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <!--{foreach $boxs as $k=> $v}
+            <div class="rad-box {if condition="$k == $selBox['sel_index'] && $isSel"}current{/if} " data-id="{$v.plan_id}" data-count="{$v.sy_count}">
+                <div class="rad-test">
+                    <p>锁仓{$v.days}天</p>
+                    <p>{$v.rate}%
+                        <span>
+                                利率
+                        </span>
+                    </p>
+                    <p>{$v.hours}点开抢</p>
+                </div>
+                <input type="radio" name="q">
+            </div>
+            {/foreach}-->
+        </div>
+        <div class="item">
+            <p style="color:#000000;">交易密码</p>
+            <input id="password" type="password" placeholder="请输入交易密码" class="psw">
+        </div>
+        <div class="sub">
+            <a id="qdBtn" href="javascript:;">
+                确认锁仓
+            </a>
+        </div>
+        <div>
+            <div id="main"></div>
+        </div>
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="javascript:;">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+//    $(function() {
+//        $(".rad-box").click(function() {
+//            $(".rad-box.current").removeClass('current');
+//            $(this).addClass('current');
+//            $('#syCount').html($(this).data('count'));
+//        });
+//    });
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data:{$dates}
+           // data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} '
+            },
+            axisPointer: {
+                snap: true
+            }
+        },
+        visualMap: {
+            show: false,
+            dimension: 0
+        },
+        series: [{
+            name: 'LTC价格',
+            type: 'line',
+            smooth: true,
+            data:{$moneys}
+           // data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400]
+        }]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    var scObj = {isCommit:false,url:'/index/lock_order/commit',data:''};
+
+    $('#qdBtn').click(function(){
+
+        var money = $('#scCount').val();
+        var password = $('#password').val();
+        if(password == '') {
+            alertMsg('交易密码不能为空');return;
+        }
+        if (money=='') {
+            alertMsg('锁仓份额格式不正确');return;
+        }
+        money = parseInt(money);
+        if (money>50 || money<0 || isNaN(money)) {
+            alertMsg('锁仓份额大于0且不能超过50');return;
+        }
+        scObj.data = {money:money, password:password};
+        $.kingAjax(scObj,undefined,function(res){
+            if (res.hasOwnProperty('data') && res.data.status == 2) {
+                $('#syCount').html(res.data.data);
+            }
+            alertMsg(res.msg);
+        })
+    });
+</script>
+
+</html>

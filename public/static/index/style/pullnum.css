@@ -1,0 +1,41 @@
+textarea,
+input {
+  border: none;
+  outline: none;
+  font-size: 0.4rem;
+}
+.payId {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.2rem;
+}
+.payContent {
+  height: 2.4rem;
+  padding: 0.13333333rem 0;
+  flex-grow: 1;
+}
+.inputContent {
+  flex-grow: 1;
+}
+div.sub {
+  width: 100%;
+  height: 2.13333333rem;
+  padding: 0 0.4rem;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.13333333rem solid #f3f3f3;
+}
+div.sub .btn {
+  width: 100%;
+  height: 1.28rem;
+  border: none;
+  outline: none;
+  background: #216ea8;
+  font-size: 0.42666667rem;
+  color: #ffffff;
+  border-radius: 0.13333333rem;
+}

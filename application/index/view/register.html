@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+
+    <link rel="stylesheet" href="/static/index/style/register.css?v=1">
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+{include file="common/js"}
+</head>
+
+<body>
+    <header>
+        <div>
+            注册
+        </div>
+    </header>
+    <div class="content">
+        <form id="regForm">
+            <div class="input-box">
+                <input id="mobile" name="mobile" type="text" placeholder="请输入注册手机号">
+            </div>
+            <div class="input-box">
+                <input name="password" type="password" placeholder="请设置用户密码">
+            </div>
+            <div class="input-box">
+                <input name="password1" type="password" placeholder="请再次确认密码">
+            </div>
+            <div class="input-box">
+                <input name="trade_password" type="password" placeholder="请设置交易密码">
+            </div>
+            <div class="input-box">
+                <input name="trade_password1" type="password" placeholder="请再次确认交易密码">
+            </div>
+            <div class="input-box">
+                <input name="invitation_code" type="text" value="{$regCode}" placeholder="请输入用户邀请码">
+                <a href="javascript:;" class="no-qr">
+                    没有邀请码?
+                </a>
+            </div>
+            <div class="input-box">
+                <input name="verify" type="text" placeholder="请输入验证码">
+                <a id="verifyA" href="javascript:;" class="get-qr">获取验证码</a>
+            </div>
+            <div class="agreeBox">
+                <div class="agree">
+                    <div class="imgBox" data-status="0">
+                        <img style="display: none" id="tongyi" class="imgItem" src="/static/index/image/check.png" alt="">
+                    </div>
+                    <span id="xieyi">同意LTC用户注册服务协议</span>
+                </div>
+            </div>
+            <div class="register">
+                <input type="button" id="regBtn" value="注册">
+            </div>
+            <div class="login">
+                <input type="button" id="loginBtn" value="登录">
+            </div>
+        </form>
+    </div>
+    <div class="pin">
+        <div class="pin-content">
+            <div class="pin-title">
+                你的专属邀请码
+            </div>
+            <div class="pin-member">
+                {$invitationCode}
+            </div>
+            <div class="close">
+                <img src="/static/index/image/close.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="bottom-content"></div>
+</body>
+<script>
+    var close = document.querySelector(".close");
+    var pin = document.querySelector(".pin");
+    var noQr = document.querySelector(".no-qr");
+    close.addEventListener("click", function() {
+        pin.style.display = "none";
+    });
+    noQr.addEventListener("click", function() {
+        pin.style.display = "flex";
+    });
+    var commitObj = {isCommit:false, url:'/index/user/reg', data:''};
+    $('#regBtn').click(function(){
+        if(parseInt($('.imgBox').data('status')) == 0){
+            alertMsg('请先阅读注册协议！');return;
+        }
+        commitObj.data = $('#regForm').serialize();
+        $.kingAjax(commitObj);
+    });
+    var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
+    $('#verifyA').click(function(){
+        verifyObj.data = {mobile:$('#mobile').val(), type:0, captcha:'ltc_captcha'};
+        //return console.log(verifyObj);
+        getVerify('#verifyA', verifyObj);
+    });
+    $('#loginBtn').click(function(){
+        location.href = '/index/index/login';
+    })
+    $(".imgBox").click(function() {
+        if(parseInt($(this).data('status')) == 0){
+            $(this).data('status', 1);
+        }else{
+            $(this).data('status', 0);
+        }
+        $(this).find("img").toggle();
+    })
+    $('#xieyi').click(function(){
+        location.href = '/index/index/xieyi';
+    })
+</script>
+
+</html>

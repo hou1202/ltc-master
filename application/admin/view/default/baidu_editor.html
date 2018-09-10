@@ -1,0 +1,18 @@
+<div class="layui-form-item">
+    <div class="layui-row">
+        <div class="layui-col-md1">
+            <label class="king-label">详细内容</label>
+        </div>
+        <div class="layui-col-md9">
+            <textarea style="padding: 0;margin:0;min-height:400px;max-height: 100%;" id="editor" name="content">{if condition="isset($model.content)"}{$model.content}{/if}</textarea>
+            <script src="/static/uedit/ueditor.config.js"></script>
+            <script src="/static/uedit/ueditor.all.min.js"></script>
+            <script>
+                var ue = UE.getEditor('editor');
+                function edit() {
+                    $("textarea[name=content]").val(ue.getContent());
+                }
+            </script>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/css/index.css" media="all">
+    <link rel="stylesheet" href="/static/admin/js/plugins/zTree/zTreeStyle.css" type="text/css">
+</head>
+<body>
+<blockquote class="layui-elem-quote query-index">
+    <form id="searchForm" action="{$loadUrl}" class="layui-form">
+        <input type="hidden" name="sortField" value="{$sortField}">
+        <input type="hidden" name="sortType" value="{$sortType}">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="searchName" value="{$searchName}" placeholder="关键字" autocomplete="off">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="searchDate" value="{$searchDate}" name="searchDate" placeholder="时间范围" >
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </div>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn layui-btn-radius layui-btn-warm" onclick="indexAdd()"><i class="layui-icon">&#xe608;</i>添加</button>
+            </div>
+        </div>
+    </form>
+</blockquote>
+<div class="index-box">
+    <table class="layui-table" lay-data="{ url:'{$loadUrl}', page:{ curr:{$page},limit:20,layout:['prev','page','next','count','skip']}, id:'tIndex', method:'POST', height:'full-100',initSort:{ field:'{$sortField}',type:'{$sortType}'},where:{sortField:'{$sortField}',sortType:'{$sortType}',searchName:'{$searchName}',searchDate:'{$searchDate}' }}" lay-filter="tIndex">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id',sort:true}">ID</th>
+            <th lay-data="{field:'rolename'}">角色名</th>
+            <th lay-data="{field:'c_time',align:'center'}">创建时间</th>
+            <th lay-data="{align:'center',toolbar:'#barDemo'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<!-- 角色分配 -->
+<div class="zTreeDemoBackground left" style="display: none" id="role">
+    <input type="hidden" id="nodeid">
+    <div>
+        <ul id="treeType" class="ztree"></ul>
+    </div>
+    <div>
+        <button type="button" class="layui-btn" style="margin-left:126px;" id="postform">确认分配</button>
+    </div>
+</div>
+<script type="text/javascript">
+    zNodes = '';
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="setAuth">分配权限</a>
+    <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+<script src="/static/admin/plugins/layui/layui.js"></script>
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/king.js"></script>
+<script src="/static/admin/js/kingAjax.js"></script>
+<script type="text/javascript" src="/static/admin/js/plugins/zTree/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/static/admin/js/plugins/zTree/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="/static/admin/js/plugins/zTree/jquery.ztree.exedit-3.5.js"></script>
+<script>
+    layui.use(['table', 'laydate', 'form'], function(){
+        var table = layui.table,
+                laydate = layui.laydate,
+                    form = layui.form;
+        laydate.render({elem:'#searchDate',range:true,type:'date',format:'yyyy/MM/dd'});
+        form.on('submit(search)', function(data){
+            table.reload('tIndex', {where:data.field});
+            return false;
+        });
+        table.on('sort(tIndex)', function(obj){
+            $('input[name=sortField]').val(obj.field);
+            $('input[name=sortType]').val(obj.type);
+            table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});
+        });
+        table.on('tool(tIndex)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            if(layEvent === 'del'){
+                layer.confirm('真的删除吗？', function(index){
+                    layer.close(index);
+                    $.kingAjaxNotJump('./del', data, function(data){obj.del();});
+                });
+            } else if(layEvent === 'edit'){
+                var serializeGet = $('#searchForm').serialize();
+                serializeGet += '&{$primaryKey}'+'='+data.{$primaryKey};
+                window.location.href = './edit.html?'+serializeGet;
+            } else if(layEvent == 'setAuth'){
+                giveQx(data.{$primaryKey});
+            }
+        });
+    });
+
+    //修改权限
+    //分配权限
+    var index = '';
+    var index2 = '';
+    function giveQx(id){
+        $("#nodeid").val(id);
+        //加载层
+        index2 = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+
+        //获取权限信息
+        $.post('./giveAccess', {'type' : 'get', 'id' : id}, function(res){
+            layer.close(index2);
+            if(res.code == 1){
+                zNodes = JSON.parse(res.data);  //将字符串转换成obj
+                //页面层
+                index = layer.open({
+                    type: 1,
+                    area:['350px', '600px'],
+                    title:'权限分配',
+                    skin: 'layui-layer-demo', //加上边框
+                    content: $('#role')
+                });
+                //设置位置
+                layer.style(index, {
+                    top: '150px'
+                });
+
+                //设置zetree
+                var setting = {
+                    check:{
+                        enable:true
+                    },
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    }
+                };
+
+                $.fn.zTree.init($("#treeType"), setting, zNodes);
+                var zTree = $.fn.zTree.getZTreeObj("treeType");
+                zTree.expandAll(true);
+
+            }else if(res.code == -1){
+                window.parent.location.href = '/admin/login/login';
+            }else{
+                layer.alert(res.msg);
+            }
+
+        });
+    }
+
+    //确认分配权限
+    $("#postform").click(function(){
+        var zTree = $.fn.zTree.getZTreeObj("treeType");
+        var nodes = zTree.getCheckedNodes(true);
+        var NodeString = '';
+        $.each(nodes, function (n, value) {
+            if(n>0){
+                NodeString += ',';
+            }
+            NodeString += value.id;
+        });
+        var id = $("#nodeid").val();
+        //写入库
+        $.post('./giveAccess.html', {'type' : 'give', 'id' : id, 'rule' : NodeString}, function(res){
+            layer.close(index);
+            if(res.code == 1){
+                layer.msg(res.msg, {
+                    icon: 1,
+                    time: 1500
+                });
+            }else if(res.code == -1){
+                window.parent.location.href = '/admin/login/login';
+            }else{
+                layer.alert(res.msg);
+            }
+
+        }, 'json')
+    })
+</script>
+</body>
+</html>

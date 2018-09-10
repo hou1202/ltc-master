@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>出售</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/trade.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>出售</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            出售
+        </a>
+        <a href="/index/buy/buy">
+            购买
+        </a>
+        <a href="/index/buy/tradelist">
+            交易列表
+        </a>
+        <a href="/index/buy/buylist">
+                收款明细
+            </a>
+        <a href="/index/buy/remit">
+                    汇款明细
+                </a>
+    </div>
+    <div class="price">
+        <div class="circle">
+            <div>
+                <p>LTC价格</p>
+                <p id="price">{$price}</p>
+            </div>
+            <div>
+                <p>可用资产</p>
+                <p id="kyMoney">{$user['ky_money']}</p>
+            </div>
+        </div>
+    </div>
+    <!-- 锁仓列表开始 -->
+    <div class="list-content">
+        <ul class="top-title">
+            <li>交易量</li>
+            <li>交易总价</li>
+            <li>状态</li>
+            <li>操作</li>
+        </ul>
+        {foreach name="orders" item="i"}
+        <ul class="list-item">
+            <li>
+                <p>{$i['count']}</p>
+            </li>
+            <li>{:bcmul($i['count'],$price,4)}</li>
+            <li>未交易</li>
+            <li>
+                <a class="chBtn" data-id="{$i['id']}" href="javascript:;">撮合</a>
+            </li>
+        </ul>
+        {/foreach}
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="alert">
+        <div class="alertBox">
+            <div class="alertTitle">
+                请确认交易内容
+            </div>
+            <p id="countP">
+                交易数量：30
+            </p>
+            <p>
+                LTC价格：{$price}
+            </p>
+            <p id="totalPriceP">
+                交易总价：360.00
+            </p>
+            <div class="listBtn">
+                <a href="javascript:;" class="leftBtn">
+                    确认交易
+                </a>
+                <a href="javascript:;" class="rightBtn">
+                    再看一看
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    
+    var data = {id:0, price:0, total_price:0, count:0};
+    $('.chBtn').click(function(){
+        var count = $(this).parent().parent().find('li:eq(0) p').html();
+        var totalPrice = $(this).parent().parent().find('li:eq(1)').html();
+        var price = $('#price').html();
+        var kyMoney = $('#kyMoney').html();
+        data.id = $(this).data('id');
+        data.price = price;
+        data.total_price = totalPrice;
+        data.count = count;
+        $('#totalPriceP').html('交易总价：'+totalPrice);
+        $('#countP').html('交易数量：'+count);
+        $('.alert').show();
+    });
+    $('.rightBtn').click(function(){
+        $('.alert').hide();
+    });
+    var commitObj = {isCommit:false, url:'/index/buy/cuohe',data:''};
+    $('.leftBtn').click(function(){
+        commitObj.data = data;
+        $.kingAjax(commitObj,undefined,function(res){
+            if(res.msg == '可用资产不足！'||res.msg=='自己不能给自己发布的购买撮合！'){
+                alertMsg(res.msg);
+            }else {
+                alertMsg(res.msg, function () {
+                    location.reload();
+                })
+            }
+        });
+    });
+</script>
+
+</html>

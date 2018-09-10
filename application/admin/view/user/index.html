@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/css/index.css" media="all">
+</head>
+<body>
+<blockquote class="layui-elem-quote query-index">
+    <form id="searchForm" action="{$loadUrl}" class="layui-form">
+        <input type="hidden" name="sortField" value="{$sortField}">
+        <input type="hidden" name="sortType" value="{$sortType}">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="searchName" value="{$searchName}" placeholder="姓名/手机号/账号" autocomplete="off">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="searchDate" value="{$searchDate}" name="searchDate" placeholder="时间范围" >
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </div>
+        </div>
+    </form>
+</blockquote>
+
+<div class="index-box">
+    <table class="layui-table" lay-data="{ url:'{$loadUrl}',page:{ curr:{$page},limit:20,layout:['prev','page','next','count','skip']},id:'tIndex',method:'POST',height:'full-100',initSort:{ field:'{$sortField}',type:'{$sortType}' },where:{hospital_id:'{$hospital_id}',sortField:'{$sortField}',sortType:'{$sortType}',searchName:'{$searchName}',searchDate:'{$searchDate}',status:'{$status}' }}" lay-filter="tIndex">
+        <thead>
+        <tr>
+            <th lay-data="{field:'user_id',sort:true,width:80}">ID</th>
+            <th lay-data="{field:'real_name'}">真实姓名</th>
+            <th lay-data="{field:'mobile'}">手机号</th>
+            <th lay-data="{field:'identity_number'}">身份证号码</th>
+            <th lay-data="{field:'invitation_code'}">邀请码</th>
+            <th lay-data="{field:'ky_money'}">可用资产</th>
+            <th lay-data="{field:'gd_money'}">固定资产</th>
+            <th lay-data="{templet:'#statusTemp',align:'center',width:80}">状态</th>
+            <th lay-data="{field:'c_time',align:'center'}">注册时间</th>
+            <th lay-data="{align:'center',toolbar:'#barDemo',width:380}">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script type="text/html" id="statusTemp">
+    {{# var type= parseInt(d.is_del);if(type>0){ }}
+    <span class="layui-badge-rim layui-bg-orange">禁用</span>
+    {{#  } else{ }}
+    <span class="layui-badge-rim layui-bg-blue">正常</span>
+    {{# } }}
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-warm layui-btn-sm" lay-event="addMoney">添加/减少金币</a>
+    <a class="layui-btn layui-btn-sm" lay-event="signLog">签到记录</a>
+    {{# var type= parseInt(d.is_del);if(type == 0){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">禁用</a>
+    {{#  } else{ }}
+    <a class="layui-btn  layui-btn-normal layui-btn-sm" lay-event="huifu">恢复</a>
+    {{# } }}
+</script>
+<script src="/static/admin/plugins/layui/layui.js"></script>
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/king.js"></script>
+<script src="/static/admin/js/kingAjax.js"></script>
+<script>
+    layui.use(['table', 'laydate', 'form'], function(){
+        var table = layui.table,
+                laydate = layui.laydate,
+                    form = layui.form;
+        laydate.render({ elem:'#searchDate',range:true,type:'date',format:'yyyy/MM/dd' });
+        form.on('submit(search)', function(data){
+            table.reload('tIndex', {where:data.field});
+            return false;
+        });
+        table.on('sort(tIndex)', function(obj){
+            $('input[name=sortField]').val(obj.field);
+            $('input[name=sortType]').val(obj.type);
+            table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});
+        });
+        table.on('tool(tIndex)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的禁用吗？', function(index){layer.close(index);$.kingAjaxNotJump('./del', data, function(data){table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});;});});
+            } else if(layEvent === 'edit'){ //编辑
+                var serializeGet = $('#searchForm').serialize();
+                serializeGet += '&{$primaryKey}'+'='+data.{$primaryKey};
+                window.location.href = './edit.html?'+serializeGet;
+            } else if(layEvent === 'huifu') {
+                layer.confirm('真的恢复改用户正常使用吗？', function(index){layer.close(index);$.kingAjaxNotJump('./del', data, function(data){table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});;});});
+            } else if(layEvent == 'addMoney') {
+                window.parent.app.openIframe({ url:'/admin/money_log/add.html?userId='+data.user_id, icon:'', title:'添加金币', id:'money_log'+data.user_id});
+            }else if(layEvent == 'signLog') {
+                window.parent.app.openIframe({ url:'/admin/user_sign/index.html?userId='+data.user_id, icon:'', title:data.real_name+'('+data.mobile+')-签到记录', id:'sign_log'+data.user_id});
+            }
+        });
+        table.on('edit(tIndex)', function(obj){
+            if(obj.field == 'sort') {
+                var reg = /^\d+$/;
+                if (!reg.test(obj.value)) {
+                    return layerError('请输入大于等于零的数字');
+                }
+                var value = parseInt(obj.value);
+                $.kingAjaxNotJumpError('/admin/banner/edit', {
+                    sort: value,
+                    hospital_id: obj.data.hospital_id
+                }, undefined, function () {
+                    table.reload();
+                })
+            }
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>资料管理</title>
+
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/data.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a href="/index/user/index">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>资料管理</h1>
+    </header>
+    <div class="list-title">
+        <a href="javascript:;">
+            资料管理
+        </a>
+        <a href="/index/user/editpassword">
+            登录密码
+        </a>
+        <a href="/index/user/tradepassword">
+            交易密码
+        </a>
+    </div>
+    <!-- 锁仓列表开始 -->
+    <div class="list-content">
+        <div class="head-image">
+            <a href="javascript:;">
+                <div class="head-box">
+                <img src="{$user['poster']}" id="show">
+                <!--<input type="file" accept="image/*" onchange="showImage(this)">-->
+                </div>
+            </a>
+        </div>
+        <form class="sub-box" id="userinfo">
+            <div class="">
+                <p>会员编号</p>
+                <p>{$user['vip_number']}</p>
+            </div>
+            <div class="">
+                <p>手机号码</p>
+                <p>{$user['mobile']}</p>
+            </div>
+            <div class="">
+                <p>分享码</p>
+                <p>{$user['invitation_code']}</p>
+            </div>
+            <div class="">
+                <p>注册时间</p>
+                <p>{$user['c_time']}</p>
+            </div>
+            <div>
+                <p>
+                    开户行
+                </p>
+                <select name="bank_id">
+                    {foreach $banks as $v}
+                        <option value ="{$v['id']}" {if condition="$v['id'] == $user['bank_id']"}selected{/if}>{$v['name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div>
+                <p>开户姓名</p>
+                <input name="real_name" value="{$user['real_name']}" type="text" placeholder="请输入开户姓名">
+            </div>
+            <div>
+                <p>开户账户</p>
+                <input name="bank_number" id="bankNumber" value="{$user['bank_number']}" type="text" placeholder="请输入开户账户">
+            </div>
+            <div>
+                <p>开户支行</p>
+                <input name="bank_zh_name" value="{$user['bank_zh_name']}" type="text" placeholder="请输入开户支行">
+            </div>
+            <div>
+                <p>支付宝（选填）</p>
+                <input name="alipay_number" value="{$user['alipay_number']}" type="text" placeholder="请输入支付宝账号">
+            </div>
+            <div>
+                <p>验证码</p>
+                <div>
+                    <input name="verify" type="text" placeholder="输入验证码">
+                    <a id="verifyA" href="javascript:;" class="huoqu">获取验证码</a>
+                </div>
+            </div>
+            <input type="hidden" name="poster" value="">
+            <input type="hidden" name="mobile" id="mobile" value="{$user['mobile']}">
+        </form>
+        <div class="sub">
+            <button class="btn" id="editInfo" type="button">确认修改资料</button>
+        </div>
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+<script>
+    
+    function showImage(obj) {
+        var file = obj.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            document.getElementById("show").src = e.target.result;
+        };
+        uploadFile(file, 'p_user', 'poster', 0, function(res){
+            $('input[name=poster]').val(res.data.url);
+        });
+    }
+    var updateObj = {isCommit:false,url:'/index/user/update',data:''};
+    $('#editInfo').click(function(){
+        //判断银行卡号是否正确
+        var bankno = $('#bankNumber').val();
+        if(bankno == "") {
+            layer.msg("请填写银行卡号");
+            return false;
+        }
+        if(bankno.length < 16 || bankno.length > 19) {
+            layer.msg("银行卡号长度必须在16到19之间");
+            return false;
+        }
+        var num = /^\d*$/;//全数字
+        if(!num.exec(bankno)) {
+            layer.msg("银行卡号必须全为数字");
+            return false;
+        }
+        //开头6位
+        var strBin = "10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";
+        if(strBin.indexOf(bankno.substring(0, 2)) == -1) {
+            layer.msg("银行卡号开头6位不符合规范");
+            return false;
+        }
+
+        updateObj.data = $('#userinfo').serialize();
+        $.kingAjax(updateObj,function(){
+            location.reload();
+        });
+    });
+    var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
+    $('#verifyA').click(function(){
+        verifyObj.data = {mobile:$('#mobile').val(), type:1, captcha:'ltc_captcha'};
+        getVerify('#verifyA', verifyObj);
+    });
+</script>
+</html>

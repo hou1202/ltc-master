@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$title}详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/king.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingCommon.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">{$title}详情</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+    <form class="layui-form" action="{$loadUrl}">
+        <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">姓名</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.real_name}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">账期</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.zd_month}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">所属医院</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.hospital_name}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">科室</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.department_name}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">订单笔数</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.order_count}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">账单</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="￥{$model.total_price}" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">付款状态</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="radio" name="status" value="1" title="是" {if condition="$model.status==1"}checked{/if}>
+                    <input type="radio" name="status" value="0" title="否" {if condition="$model.status==0"}checked{/if}>
+                </div>
+            </div>
+        </div>
+
+        {if condition="$model.receive_bank == ''"}
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">收款银行</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" class="layui-input" readonly value="{$user.bank_name}">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">收款卡号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" class="layui-input" readonly value="{$user.bank_number}">
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="receive_bank" class="layui-input" readonly value="{$user.bank_name} {$user.bank_number}">
+        {else /}
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">收款账号</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" class="layui-input" readonly value="{$model.receive_bank}">
+                </div>
+            </div>
+        </div>
+        {/if}
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1"><label class="king-label">备注</label></div>
+                <div class="layui-col-md5">
+                    <textarea name="remark" class="layui-textarea" placeholder="备注">{$model.remark}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <table class="layui-table" lay-size='sm'>
+                <colgroup align="center" width="60" />
+                <colgroup align="center" width="100" span="2" />
+                <colgroup width="100" />
+                <colgroup width="300" />
+                <colgroup width="100" />
+                <colgroup width="100" />
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>订单号</th>
+                    <th>完成时间</th>
+                    <th>病人姓名</th>
+                    <th>病人情况</th>
+                    <th>初诊医生</th>
+                    <th>初诊医院</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach name='orders' item='i'}
+                <tr>
+                    <td>{$key+1}</td>
+                    <td>{$i.order_number}</td>
+                    <td>{$i.diagnose_time}</td>
+                    <td>{$i.patient_name}</td>
+                    <td>{$i.pathology}</td>
+                    <td>{$i.first_doctor}</td>
+                    <td>{$i.hospital_name}</td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+        form.on('submit(demo)', function(data) {
+            $.kingAjax(data, '{$urlParam}');
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

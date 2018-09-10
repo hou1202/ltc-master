@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>交易列表</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/tradelist.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>交易列表</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/buy/trade">
+            出售
+        </a>
+        <a href="/index/buy/buy">
+            购买
+        </a>
+        <a href="javascript:;">
+            交易列表
+        </a>
+        <a href="/index/buy/buylist">
+                收款明细
+            </a>
+        <a href="/index/buy/remit">
+                    汇款明细
+                </a>
+    </div>
+    <div class="list-content">
+        <ul class="top-title">
+            <li>交易量</li>
+            <li>发布时间</li>
+            <li>预计总价</li>
+            <li>状态</li>
+            <li>操作</li>
+        </ul>
+        {foreach name="trades" item="v"}
+        <ul class="list-item">
+            <li>
+                <p>{$v['count']}</p>
+            </li>
+            <li>{$v['c_time']}</li>
+            <li>{$v['total_price']}</li>
+            <li>匹配中</li>
+            <li>
+                <a class="cancleBtn" data-id="{$v['id']}" href="javascript:;">
+                        取消
+                    </a>
+            </li>
+        </ul>
+        {/foreach}
+    </div>
+    <!-- 锁仓列表结束 -->
+    <div class="bottom-content"></div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+<script>
+    
+    var cancleObj = { url:'/index/buy/cancel',data:'',isCommit:false};
+    $('.cancleBtn').click(function(){
+        var $btn = $(this);
+        cancleObj.data = {id:$btn.data('id')};
+        $.kingAjax(cancleObj,function(){
+            $btn.parent().parent().remove();
+        })
+    });
+</script>
+
+</html>

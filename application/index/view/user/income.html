@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>今日收益</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/today.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <div class="back-content">
+        <header class="public">
+            <a href="/index/user/index">
+                <img src="/static/index/image/arrow.gif" alt="">
+            </a>
+            <h1>今日收益</h1>
+        </header>
+        <div class="top-content">
+            <div class="number">
+                {$totalIncome}
+            </div>
+            <p>
+                今日总收益
+            </p>
+        </div>
+    </div>
+    <div class="item-content">
+        <div class="item">
+            <p>
+                今日锁仓收益
+            </p>
+            <p>
+                +{$user['today_income']}
+            </p>
+        </div>
+        <div class="item">
+            <p>
+                今日分享收益
+            </p>
+            <p>
+                +{$user['to_share_income']}
+            </p>
+        </div>
+        <div class="item">
+            <p>
+                今日签到收益
+            </p>
+            <p>
+                +{$signIncome}
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

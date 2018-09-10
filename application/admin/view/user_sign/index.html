@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/css/index.css" media="all">
+</head>
+<body>
+<blockquote class="layui-elem-quote query-index">
+    <form id="searchForm" action="{$loadUrl}" class="layui-form">
+        <input type="hidden" name="sortField" value="{$sortField}">
+        <input type="hidden" name="sortType" value="{$sortType}">
+        <input type="hidden" name="userId" value="{$userId}">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="searchName" value="{$searchName}" placeholder="姓名/手机号/账号" autocomplete="off">
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="searchDate" value="{$searchDate}" name="searchDate" placeholder="时间范围" >
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </div>
+        </div>
+    </form>
+</blockquote>
+
+<div class="index-box">
+    <table class="layui-table" lay-data="{ url:'{$loadUrl}',page:{ curr:{$page},limit:20,layout:['prev','page','next','count','skip']},id:'tIndex',method:'POST',height:'full-100',initSort:{ field:'{$sortField}',type:'{$sortType}' },where:{sortField:'{$sortField}',sortType:'{$sortType}',userId:{$userId},searchName:'{$searchName}',searchDate:'{$searchDate}' }}" lay-filter="tIndex">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id',sort:true,width:80}">ID</th>
+            <th lay-data="{field:'real_name'}">姓名</th>
+            <th lay-data="{field:'invitation_code'}">账号</th>
+            <th lay-data="{field:'mobile'}">手机号</th>
+            <th lay-data="{field:'sign_date',align:'center'}">签到日期</th>
+            <th lay-data="{field:'c_time',align:'center'}">签到时间</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+<script src="/static/admin/plugins/layui/layui.js"></script>
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/king.js"></script>
+<script src="/static/admin/js/kingAjax.js"></script>
+<script>
+    layui.use(['table', 'laydate', 'form'], function(){
+        var table = layui.table,
+                laydate = layui.laydate,
+                    form = layui.form;
+        laydate.render({ elem:'#searchDate',range:true,type:'date',format:'yyyy/MM/dd' });
+        form.on('submit(search)', function(data){
+            table.reload('tIndex', {where:data.field});
+            return false;
+        });
+        table.on('sort(tIndex)', function(obj){
+            $('input[name=sortField]').val(obj.field);
+            $('input[name=sortType]').val(obj.type);
+            table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});
+        });
+        table.on('tool(tIndex)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            if(layEvent === 'del'){
+                layer.confirm('真的删除吗？', function(index){layer.close(index);$.kingAjaxNotJump('./del', data, function(data){obj.del();});});
+            } else if(layEvent === 'edit'){ //编辑
+                var serializeGet = $('#searchForm').serialize();
+                serializeGet += '&{$primaryKey}'+'='+data.{$primaryKey};
+                window.location.href = './edit.html?'+serializeGet;
+            }
+        });
+        table.on('edit(tIndex)', function(obj){
+            if(obj.field == 'sort') {
+                var reg = /^\d+$/;
+                if (!reg.test(obj.value)) {
+                    return layerError('请输入大于等于零的数字');
+                }
+                var value = parseInt(obj.value);
+                $.kingAjaxNotJumpError('/admin/service_item/edit', {
+                    sort: value,
+                    item_id: obj.data.item_id
+                }, undefined, function () {
+                    table.reload();
+                })
+            }
+        })
+    });
+</script>
+</body>
+</html>

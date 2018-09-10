@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>锁仓详情</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/lock.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>锁仓明细</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/lock_order/index">
+            锁仓计划
+        </a>
+        <a href="/index/lock_order/orders">
+            锁仓明细
+        </a>
+        <a href="/index/order">
+            最新成交
+        </a>
+    </div>
+    <div class="list-content">
+        <ul class="userinfo">
+            <li>
+                <p>锁仓数量</p>
+                <p>{$order['money']}</p>
+            </li>
+            <li>
+                <p>开始时间</p>
+                <p>{$order['start_date']}</p>
+            </li>
+            <li>
+                <p>结束时间</p>
+                <p>{$order['end_date']}</p>
+            </li>
+            <li class="bigItem">
+                <p>锁仓时长</p>
+                <p>{$order['days']}天</p>
+            </li>
+            <li>
+                <p>锁仓进度</p>
+                <p>第{$day}天</p>
+            </li>
+            <li>
+                <p>锁仓利率</p>
+                <p>{$order['rate']}%</p>
+            </li>
+            <li class="bigItem">
+                <p>当前收益</p>
+                <p>{$currentIncome}</p>
+            </li>
+            <li class="bigItem">
+                <p>预计收益</p>
+                <p>{$order['total_income']}</p>
+            </li>
+            <li class="bigItem">
+                <p>锁仓状态</p>
+                <p>{$status}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+
+</html>

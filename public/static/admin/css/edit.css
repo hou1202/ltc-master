@@ -1,0 +1,97 @@
+.king-label{
+    line-height: 20px;
+    display: block;
+    padding: 9px 0;
+    margin-right: 15px;
+    font-weight: 400;
+    text-align: right;
+}
+.edit-content{
+    margin: 15px;
+}
+.layui-elem-quote.query-index.add-block{
+    min-height: 38px;
+}
+.add-title{
+    font-size: 16px;
+}
+.center{
+    text-align: center;
+}
+.img-box{
+    overflow: hidden;
+}
+.up-section{
+    position: relative;
+    float: left;
+}
+.up-img{
+    width:100%;
+    height:100%;
+}
+.up-section a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+}
+.up-section a input {
+    position: absolute;
+    height: 100%;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.up-section .up-span-short{
+    display: block;
+    width: 100%;
+    height: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    background: rgba(0,0,0,.2);
+    color: red;
+    text-align: center;
+    font-size: 14px;
+    line-height: 2em;
+}
+.up-section .up-span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    background: rgba(0,0,0,.5);
+}
+.up-section:hover .close-upimg{
+    display: block;
+}
+.up-section:hover .up-span{
+    visibility: visible;
+}
+.up-section .close-upimg{
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    display: none;
+    z-index: 10;
+}
+.mid{
+    float: left;
+    margin: 0 10px;
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+    line-height: 38px;
+}

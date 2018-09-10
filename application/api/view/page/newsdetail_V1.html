@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>{$news.title}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link type="text/css" rel="stylesheet" href="/static/api/css/newsdetail.css"/>
+</head>
+<body>
+<div class="head">
+    <img src="{$news.picture}" alt="">
+    <div class="date">
+        <span class="author">作者：万象车业</span>
+        <span class="time">发布时间：{$news.c_time}</span>
+    </div>
+</div>
+<div class="title">
+    {$news.title}
+</div>
+<div class="content">
+    {$news.content}
+</div>
+</body>
+</html>

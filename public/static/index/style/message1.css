@@ -1,0 +1,81 @@
+div.btn-box {
+  width: 100%;
+  padding: 0 0.4rem;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+div.btn-box .btn-pull {
+  width: 2.66666667rem;
+  height: 0.93333333rem;
+  line-height: 0.93333333rem;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  background: #216ea8;
+  font-size: 0.34666667rem;
+  border-radius: 0.13333333rem;
+}
+.text-box {
+  width: 100%;
+  height: 3.2rem;
+  padding: 0.26666667rem 0.4rem;
+}
+.text-box textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.4rem;
+}
+.file-box {
+  height: 1.89333333rem;
+}
+.file-box img {
+  display: inline-block;
+  width: 1.89333333rem;
+  height: 1.89333333rem;
+  float: left;
+  margin-right: 0.13333333rem;
+}
+.img-box {
+  display: inline-block;
+  width: 1.89333333rem;
+  height: 1.89333333rem;
+  background: url("../image/upload.png") no-repeat;
+  background-size: 100%;
+  float: left;
+}
+.img-box input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.image-box {
+  width: 100%;
+  padding: 0.4rem;
+}
+div.sub {
+  width: 100%;
+  height: 2.13333333rem;
+  padding: 0 0.4rem;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.13333333rem solid #f3f3f3;
+}
+div.sub .btn {
+  width: 100%;
+  height: 1.28rem;
+  border: none;
+  outline: none;
+  background: #216ea8;
+  font-size: 0.42666667rem;
+  color: #ffffff;
+  border-radius: 0.13333333rem;
+}

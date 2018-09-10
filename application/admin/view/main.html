@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>控制面板</title>
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css" media="all">
+    <style>
+        .info-box {
+            height: 85px;
+            background-color: #ecf0f5;
+        }
+        .info-box .info-box-icon {
+            border-top-left-radius: 2px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 2px;
+            display: block;
+            float: left;
+            height: 85px;
+            width: 85px;
+            text-align: center;
+            font-size: 45px;
+            line-height: 85px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box .info-box-content {
+            padding: 5px 10px;
+            margin-left: 85px;
+        }
+
+        .info-box .info-box-content .info-box-text {
+            display: block;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase;
+        }
+
+        .info-box .info-box-content .info-box-number {
+            display: block;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .main {
+            margin-top: 25px;
+        }
+        .main .layui-row {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-fluid main">
+    <div class="layui-row layui-col-space15" style="margin-top: 50px">
+        <div class="layui-col-md3">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color:#00c0ef !important;color:white;"><i class="fa fa-ambulance" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">今日累计充值</span>
+                    <span class="info-box-number">{$todayCount}</span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color:#dd4b39 !important;color:white;"><i class="fa fa-google-plus" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">当前LTC价格</span>
+                    <span class="info-box-number">{$totalPrice}</span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color:#00a65a !important;color:white;"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">今日签到人数</span>
+                    <span class="info-box-number">{$memberCount}</span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="info-box">
+                <span class="info-box-icon" style="background-color:#f39c12 !important;color:white;"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">新用户</span>
+                    <span class="info-box-number">{$newUser}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" style="margin-top: 50px">
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="500">
+                <col width="150">
+                <col width="500">
+            </colgroup>
+            <thead>
+            <tr>
+                <th colspan="4">系统配置</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>项目名</td>
+                <td>{$Think.config.company_config.app_name}</td>
+                <td>开发公司</td>
+                <td>{$Think.config.company_config.develop_name}</td>
+            </tr>
+            <tr>
+                <td>服务器系统</td>
+                <td>{:php_uname('s')}</td>
+                <td>PHP版本</td>
+                <td>V{:PHP_VERSION}</td>
+            </tr>
+            <tr>
+                <td>IP</td>
+                <td>{$_SERVER['REMOTE_ADDR']}</td>
+                <td>数据库</td>
+                <td>MYSQL V5.6</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="/static/admin/plugins/layui/layui.js"></script>
+</body>
+
+</html>

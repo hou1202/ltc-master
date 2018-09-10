@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购买</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/buy.css?v=1">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="public">
+        <a href="/index/index/index">
+            <img src="/static/index/image/arrow.gif">
+        </a>
+        <h1>购买</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/buy/trade">
+            出售
+        </a>
+        <a href="javascript:;">
+            购买
+        </a>
+        <a href="/index/buy/tradelist">
+            交易列表
+        </a>
+        <a href="/index/buy/buylist">
+                收款明细
+            </a>
+        <a href="/index/buy/remit">
+                    汇款明细
+                </a>
+    </div>
+
+    <div class="content">
+        <div class="item-input">
+            <p>会员编号</p>
+            <p>{$user['vip_number']}</p>
+        </div>
+        <div class="item-input">
+            <p>手机号码</p>
+            <p>{$user['mobile']}</p>
+        </div>
+        <div class="item-input">
+            <p>可用资产</p>
+            <p>{$user['ky_money']}</p>
+        </div>
+        <div class="item-input">
+            <p>LTC价格</p>
+            <p>{$ltcPrice}</p>
+        </div>
+        <form id="commitForm">
+        <div class="input-box">
+            <p>
+                购买数量
+            </p>
+            <input name="count" type="number" placeholder="请输入购买数量">
+        </div>
+        <div class="input-box">
+            <p>
+                交易密码
+            </p>
+            <input name="password" type="password" placeholder="请输入交易密码">
+        </div>
+        <!--<div class="input-box">-->
+            <!--<p>-->
+                <!--验证码-->
+            <!--</p>-->
+            <!--<input name="verify" type="text" placeholder="请输入验证码">-->
+            <!--<a id="verifyA" href="javascript:;">获取验证码</a>-->
+        <!--</div>-->
+        <div class="sub">
+            <input id="buyBtn" type="button" value="发布购买需求">
+        </div>
+        <input type="hidden" id="mobile" name="mobile" value="{$user['mobile']}">
+        </form>
+    </div>
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+<script>
+    $(function(){
+        var commitObj = {isCommit:false, url:'/index/buy/commit', data:''};
+        $('#buyBtn').click(function(){
+            commitObj.data = $('#commitForm').serialize();
+            $.kingAjax(commitObj);
+        });
+        var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
+        $('#verifyA').click(function(){
+            verifyObj.data = {mobile:$('#mobile').val(), type:1, captcha:'ltc_captcha'};
+            getVerify('#verifyA', verifyObj);
+        });
+    });
+</script>
+
+</html>

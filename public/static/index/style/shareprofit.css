@@ -1,0 +1,121 @@
+div.list-title {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 0.8rem;
+  line-height: 0.77333333rem;
+  padding: 0 0.4rem;
+  margin-top: 0.4rem;
+}
+div.list-title a {
+  flex-grow: 1;
+  color: #216ea8;
+  text-align: center;
+  font-size: 0.4rem;
+  border: 1px solid;
+}
+div.list-title a:first-child {
+  border-radius: 0.13333333rem 0 0 0.13333333rem;
+}
+div.list-title a:last-child {
+  border-radius: 0 0.13333333rem 0.13333333rem 0;
+}
+div.list-title a:nth-child(2) {
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #216ea8;
+  border-bottom: 1px solid #216ea8;
+  color: #ffffff;
+  background: #216ea8;
+}
+div.price {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  height: 4.45333333rem;
+  overflow: hidden;
+}
+div.price .circle {
+  width: 6.02666667rem;
+  height: 6.02666667rem;
+  border: 2px solid #216ea8;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: 2.66666667rem;
+  background: #f3faff;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+div.price .circle div {
+  width: 100%;
+  line-height: 0.66666667rem;
+  margin-top: 0.33333333rem;
+  font-size: 0.4rem;
+}
+div.price .circle div p:first-child {
+  color: #999999;
+}
+div.price .circle div p:last-child {
+  color: #216ea8;
+}
+div.price .circle div:first-child {
+  margin-top: 0.53333333rem;
+}
+div.price .circle div:last-child p:last-child {
+  font-size: 0.48rem;
+}
+.list-content h2 {
+  height: 1.06666667rem;
+  width: 100%;
+  padding: 0 0.4rem;
+  line-height: 1.06666667rem;
+  color: #808080;
+  font-size: 0.4rem;
+  background: #f5f5f5;
+}
+.list-content .top-title {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 0 0.4rem;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  font-size: 0.37333333rem;
+  color: #414141;
+  font-weight: 600;
+  border-bottom: 1px solid #dbdbdb;
+  background: #fffff7;
+}
+.list-content .top-title li {
+  flex-grow: 1;
+  text-align: center;
+}
+.list-content .list-item {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 0 0.4rem;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  font-size: 0.37333333rem;
+  color: #414141;
+}
+.list-content .list-item li {
+  border-bottom: 1px solid #dbdbdb;
+  text-align: center;
+  width: 25%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list-content .list-item li:last-child {
+  color: #216ea8;
+}
+.list-content .list-item li:last-child a {
+  color: inherit;
+}

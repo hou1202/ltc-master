@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="/static/index/lib/swiper-4.3.3.min.css">
+    <link rel="stylesheet" href="/static/index/style/index.css?v=2">
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header class="hesd">
+        <div class="top-header">
+            <!--<div class="clearfix">
+                <img class="head" src="{$user['poster']}" alt="">
+                <div class="detail">
+                    <p>
+                        会员编号：{$user['vip_number']}
+                    </p>
+                    <P>
+                        分享编码：{$user['invitation_code']}
+                    </P>
+                </div>
+            </div>
+            {if condition="$hasSign"}
+            <a id="signBtn" href="javascript:;" class="sign">
+                <i class="sign-image"></i>
+                <span id="signSpan">{if condition="$isSign"}已签到{else /}签到{/if}</span>
+            </a>
+            {/if}-->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="/static/index/image/banner1.jpg"></div>
+                    <div class="swiper-slide"><img src="/static/index/image/banner2.jpg"></div>
+                    <div class="swiper-slide"><img src="/static/index/image/banner3.jpg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="top-list">
+            <ul>
+                <li>
+                    <p>用户帐户</p>
+                    <p >{$user['mobile']}</p>
+                </li>
+                <li>
+                    <p>等级</p>
+                    <p>￥{$price}</p>
+                </li>
+                <li>
+                    <p>矿机数量</p>
+                    <p>{$user['gd_money']}</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p>可用资产</p>
+                    <p id="kyMoney">{$user['ky_money']}</p>
+                </li>
+                <li>
+                    <p>LTC价格</p>
+                    <p>￥{$price}</p>
+                </li>
+                <li>
+                    <p>理财资产</p>
+                    <p>{$user['gd_money']}</p>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="title-list">
+        <a href="/index/buy/buy" class="noline">
+            <!--<i class="ticon1"></i>-->
+            <img src="/static/index/image/ticon1.png" class="ticon">
+            <p>购买</p>
+        </a>
+        <a href="/index/buy/remit" class="line">
+            <!--<i class="ticon2"></i>-->
+            <img src="/static/index/image/ticon2.png" class="ticon">
+            <p>汇款明细</p>
+        </a>
+        <a href="/index/buy/trade" class="line">
+            <!--<i class="ticon3"></i>-->
+            <img src="/static/index/image/ticon3.png" class="ticon">
+            <p>出售</p>
+        </a>
+        <a href="/index/buy/buylist" class="line">
+            <!--<i class="ticon4"></i>-->
+            <img src="/static/index/image/ticon4.png" class="ticon">
+            <p>收款明细</p>
+        </a>
+        <a href="/index/lock_order/index" class="noline">
+            <!--<i class="ticon5"></i>-->
+            <img src="/static/index/image/ticon5.png" class="ticon">
+            <p>矿机收益</p>
+        </a>
+        <a href="/index/lock_order/orders" class="line">
+            <!--<i class="ticon6"></i>-->
+            <img src="/static/index/image/ticon6.png" class="ticon">
+            <p>理财收益</p>
+        </a>
+        <!--<a href="/index/share/income" class="line">
+            &lt;!&ndash;<i class="ticon7"></i>&ndash;&gt;
+            <img src="/static/index/image/ticon7.png" class="ticon">
+            <p>分享明细</p>
+        </a>
+        <a href="/index/lock_order/lockdeal" class="line">
+            &lt;!&ndash;<i class="ticon8"></i>&ndash;&gt;
+            <img src="/static/index/image/ticon8.png" class="ticon">
+            <p>最新成交</p>
+        </a>-->
+    </div>
+    <div class="new">
+        <h2>
+            <i class="hicon1"></i>
+            <span>最新公告</span>
+        </h2>
+        <div class="list-new">
+            {foreach $news as $v}
+            <a href="/index/news/detail/id/{$v.news_id}">
+                <p>
+                    {$v.title}
+                </p>
+                <p>
+                    {$v.c_time}
+                </p>
+            </a>
+            {/foreach}
+        </div>
+    </div>
+    <!--<div class="member">
+        <h2>
+            <i class="hicon2"></i>
+            <span>新会员注册排名</span>
+        </h2>
+        <div class="swiper-container huiyuan">
+            <div class="swiper-wrapper">
+                {foreach name='orders' item='i'}
+                <div class="swiper-slide list-new">
+                    <a href="javascript:;">
+                       
+
+                      
+                        <p>
+                            新注册会员【{$i['vip_number']}】成功锁币{$i['money']}
+                        </p>
+                    </a>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>-->
+    <input type="hidden" id="orderCount" value="{:count($orders)}">
+    <div class="bottom-content">
+
+    </div>
+    <footer>
+        <div>
+            <a href="javascript:void(0)">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>理财</p>
+            </a>
+            <a href="/index/money/pulladdress.html">
+                <i class="ficon3"></i>
+                <p>矿机</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+<script src="/static/index/lib/swiper-4.3.3.min.js"></script>
+<script>
+    if(parseInt($('#orderCount').val()) > 3) {
+        var mySwiper = new Swiper('.huiyuan', {
+            direction: 'vertical',
+            slidesPerView: "auto",
+            loop: true,
+            autoplay: true
+        });
+    }
+    var signData = { url :'/index/user/sign',isCommit:false,data:''};
+    $('#signBtn').click(function(){
+        if($('#signSpan').html() != '签到'){
+            return;
+        }
+        $.kingAjax(signData, function(res){
+            $('#signSpan').html('已签到');
+            $('#kyMoney').html(res.data.ky_money);
+            alertMsg(res.msg);
+        });
+    });
+
+    var mySwipers = new Swiper('.swiper-container', {
+        autoplay: true,//可选选项，自动滑动
+        width:window.innerWidth,
+        loop : true,
+    })
+</script>
+
+</html>

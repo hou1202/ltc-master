@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>充币详情</title>
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/pull.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+    <style>
+        div.list-title a:nth-child(4) {
+            border-left: none;
+            border-right: none;
+            border-top: 1px solid #216ea8;
+            border-bottom: 1px solid #216ea8;
+            color: #ffffff;
+            background: #216ea8;
+        }
+        div.list-title a:nth-child(3) {
+            background: #fff;
+            color: #216ea8;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="public">
+        <a class="goBack" href="javascript:;">
+            <img src="/static/index/image/arrow.gif" alt="">
+        </a>
+        <h1>充币详情</h1>
+    </header>
+    <div class="list-title">
+        <a href="/index/money/apply">
+            提币申请
+        </a>
+        <a href="/index/money/pulladdress">
+            充币地址
+        </a>
+        <a href="/index/money/push">
+            提币明细
+        </a>
+        <a href="/index/money/pull">
+            充币明细
+        </a>
+    </div>
+    <div class="list-content">
+        <ul class="userinfo">
+            <li>
+                <p>会员编号</p>
+                <p>{$user['vip_number']}</p>
+            </li>
+            <li>
+                <p>联系方式</p>
+                <p>{$user['mobile']}</p>
+            </li>
+            <li>
+                <p>充币数量</p>
+                <p>{$cb['count']}</p>
+            </li>
+            <li class="bigItem">
+                <p>交易ID</p>
+                <p>{$cb['jyid']}</p>
+            </li>
+            <li>
+                <p>提交时间</p>
+                <p>{$cb['c_time']}</p>
+            </li>
+            <li>
+                <p>充币状态</p>
+                <p>{$status[$cb['status']]}</p>
+            </li>
+            <li class="bigItem">
+                <p>反馈信息</p>
+                <p>{$cb['remark']}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="bottom-content">
+
+    </div>
+    <!-- 底部开始 -->
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="/index/user/index">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- 底部结束 -->
+</body>
+
+</html>

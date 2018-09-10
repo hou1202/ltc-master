@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/edit.css">
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+    <script type="text/javascript" src="/static/admin/js/kingFile.js"></script>
+    <script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="edit-content">
+    <blockquote class="layui-elem-quote query-index add-block">
+        <div class="layui-col-md4"><p class="add-title">修改{$title}</p></div>
+        <div class="layui-col-md4 layui-col-md-offset1"><a class="layui-btn layui-btn-normal" href="./index?{$urlParam}">返回上一页</a></div>
+    </blockquote>
+
+    <form class="layui-form" action="{$loadUrl}">
+        <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">购买人</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.real_name}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">购买人电话</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$user.mobile}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">出售人</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$sell.real_name}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">出售人电话</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$sell.mobile}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">数量</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.count}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">手续费</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.other_count}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">价格</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.price}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">总价</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.total_price}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">求购时间</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.c_time}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">撮合时间</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input id="chtime" type="text" value="{$model.ty_time}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">付款时间</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input id="fktime" type="text" value="{$model.dqr_time}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">完成时间</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.ywc_time}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">失效时间</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.sx_time}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">状态</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$status}" autocomplete="off" readonly class="layui-input" maxlength="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">备注</label>
+                </div>
+                <div class="layui-col-md5">
+                    <textarea name="remark" placeholder="请输入备注" class="layui-textarea">{$model.remark}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">后台状态</label>
+                </div>
+                <div class="layui-col-md5">
+                    <select name="sh_status">
+                        <option value="1" {if condition="$model['sh_status'] == 1"} selected{/if}>未操作</option>
+                        <option value="2" {if condition="$model['sh_status'] == 2"} selected{/if}>卖家（{$sell.real_name}）</option>
+                        <option value="3" {if condition="$model['sh_status'] == 3"} selected{/if}>买家（{$user.real_name}）</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="status" value="{$model['status']}">
+        <input type="hidden" id="sh_status" value="{$model['sh_status']}">
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md6 center">
+                    <button class="layui-btn" lay-submit lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+                layer = layui.layer;
+        form.on('submit(demo)', function(data) {
+            var status = parseInt($('#status').val());
+            if(status != 9) {
+                layer.alert('非失效状态不的订单不支持修改！',{icon:2});
+                return false;
+            }
+
+            if(data.field.sh_status == '1'){
+                layer.alert('后台状态不能调整为未操作',{icon:2});
+                return false;
+            }
+            if(parseInt($('#sh_status').val()) != 1){
+                layer.alert('后台状态不为为操作的不能再次操作',{icon:2});
+                return false;
+            }
+                layer.confirm('操作不可逆，会把资金直接打到用户账户，请确认后再操作！',  {icon: 3, title:'提示'}, function(){
+                    $.kingAjax(data, "{$urlParam}");
+                });
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

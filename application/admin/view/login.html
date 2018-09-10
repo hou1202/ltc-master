@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$Think.config.company_config.app_name}-登录</title>
+    <meta name="keywords" content="{$Think.config.keywords}">
+    <meta name="description" content="{$Think.config.description}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/admin/css/login.css"/>
+</head>
+
+<body class="beg-login-bg" style="background: url(/static/admin/images/b_login_{$backImg}.jpg) no-repeat center center fixed;">
+<div class="beg-login-box">
+    <header>
+        <h1>后台登录</h1>
+    </header>
+    <div class="beg-login-main">
+        <form action="/admin/login/login" class="layui-form" method="post">
+            <div class="layui-form-item">
+                <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe612;</i>
+                </label>
+                <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="这里输入登录名"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe642;</i>
+                </label>
+                <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="这里输入密码"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <div class="beg-pull-right">
+                    <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                        <i class="layui-icon">&#xe650;</i> 登录
+                    </button>
+                </div>
+                <div class="beg-clear"></div>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>2017 © <a href="{$Think.config.company_config.develop_url}" target="_blank">{$Think.config.company_config.develop_name}</a></p>
+    </footer>
+</div>
+<script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/kingAjax.js"></script>
+<script>
+    if(window.top!=window){
+        window.top.location.href=document.location.href;
+    }
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer,
+                form = layui.form;
+        form.on('submit(login)', function (data) {
+            return $.kingAjax(data);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="/static/index/style/person.css?v=1">
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header>
+        <div class="top-header">
+            <a href="/index/index/index">
+                <img class="arrow" src="/static/index/image/arrow.gif" alt="">
+            </a>
+            <h1>
+                <img class="head" src="{$user['poster']}" alt="">
+            </h1>
+        </div>
+        <div class="top-title">
+            <div>
+                <img class="id-head" src="/static/index/image/id.gif" alt="">
+                <span>
+                        {$user['vip_number']}
+                </span>
+            </div>
+        </div>
+        <div class="top-list">
+            <div>
+                <p>分享编码</p>
+                <p>{$user['invitation_code']}</p>
+            </div>
+            <div>
+                <p>手机号码</p>
+                <p>{$user['mobile']}</p>
+            </div>
+            <div>
+                <p>注册日期</p>
+                <p>{$user['c_time']}</p>
+            </div>
+        </div>
+    </header>
+    <div class="app-content">
+        <div class="list-top">
+            <a href="/index/user/income">
+                <p>{$incomeMoney}</p>
+                <p>今日收益</p>
+            </a>
+            <a class="line" href="/index/share/income">
+                <p>{$user['to_share_income']}</p>
+                <p>分享收益</p>
+            </a>
+            <a class="line" href="/index/share/members">
+                <p>{$shareFriend}</p>
+                <p>分享列表</p>
+            </a>
+        </div>
+        <div class="list-top center-line">
+            <a href="/index/money/apply.html">
+                <p class="icon1">
+                    <img src="/static/index/image/icon1.png">
+                </p>
+                <p>提币申请</p>
+            </a>
+            <a href="/index/money/push.html" class="line">
+                <p class="icon2">
+                    <img src="/static/index/image/icon2.png">
+                </p>
+                <p>提币明细</p>
+            </a>
+            <a href="/index/user/data.html" class="line">
+                <p class="icon3">
+                    <img src="/static/index/image/icon3.png">
+                </p>
+                <p>资料管理</p>
+            </a>
+            <a href="/index/money/pulladdress.html">
+                <p class="icon4">
+                    <img src="/static/index/image/icon4.png">
+                </p>
+                <p>充币地址</p>
+            </a>
+            <a href="/index/money/pull.html" class="line">
+                <p class="icon5">
+                    <img src="/static/index/image/icon5.png">
+                </p>
+                <p>充币明细</p>
+            </a>
+            <a class="line" href="/index/user/editpassword">
+                <p class="icon6">
+                    <img src="/static/index/image/icon6.png">
+                </p>
+                <p>密码管理</p>
+            </a>
+        </div>
+        <ul class="list-top">
+            <a href="/index/news/index">
+                <p class="icon7">
+                    <img src="/static/index/image/icon7.png">
+                </p>
+                <p>新闻中心</p>
+            </a>
+            <a href="/index/index/about" class="line">
+                <p class="icon8">
+                    <img src="/static/index/image/icon8.png">
+                </p>
+                <p>关于LTC</p>
+            </a>
+            <a href="/index/msg/add" class="line">
+                <p class="icon9">
+                    <img src="/static/index/image/icon9.png">
+                </p>
+                <p>留言反馈</p>
+            </a>
+        </ul>
+    </div>
+    <div class="exit">
+        <a id="logoutBtn" href="javascript:;">
+            安全退出
+        </a>
+    </div>
+    <div class="bottom-content"></div>
+    <footer>
+        <div>
+            <a href="/index/index/index">
+                <i class="ficon1"></i>
+                <p>首页</p>
+            </a>
+            <a href="/index/lock_order/index">
+                <i class="ficon2"></i>
+                <p>锁仓</p>
+            </a>
+            <a href="/index/share/index">
+                <i class="ficon3"></i>
+                <p>分享</p>
+            </a>
+            <a href="javascript:void(0)">
+                <i class="ficon4"></i>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+<script>
+    
+    $('#logoutBtn').click(function() {
+        $.kingAjax({ url: '/index/user/logout', isCommit: false, data: ''});
+    });
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>问题详情</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
+    <link  rel="stylesheet" type="text/css" href="/static/index/css.css" />
+    <script src="/static/index/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            document.addEventListener('DOMContentLoaded', function () {
+                var html = document.documentElement;
+                var windowWidth = html.clientWidth;
+                html.style.fontSize = windowWidth / 6.4 + 'px';
+            }, false);
+        })();
+    </script>
+</head>
+<body>
+{foreach name="data" item="v"}
+<div class="main">
+    <div class="order">
+        <div class="order-cet">{$v.title}</div>
+        <img src="/static/index/p7.png" alt="" class="order-rig"/>
+    </div>
+    <ul class="ordershow">
+        {$v.content}
+    </ul>
+</div>
+{/foreach}
+
+<script type="text/javascript">
+    $(".order").toggle(
+        function () {
+            var num=$(".order").index(this);
+            $(".ordershow:eq("+num+")").animate().show();
+            $(".order-rig:eq("+num+")").attr("src","/static/index/p6.png")
+        },
+        function () {
+            var num=$(".order").index(this);
+            $(".ordershow:eq("+num+")").hide();
+            $(".order-rig:eq("+num+")").attr("src","/static/index/p7.png")
+        }
+    );
+</script>
+</body>
+</html>

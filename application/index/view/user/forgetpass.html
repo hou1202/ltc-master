@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>忘记密码</title>
+    <link rel="stylesheet" href="/static/index/style/register.css?v=1">
+    <link rel="stylesheet" href="/static/index/style/cssreset.css">
+    <link rel="stylesheet" href="/static/index/style/public.css">
+    {include file="common/js"}
+</head>
+
+<body>
+    <header>
+        <div>
+            忘记密码
+        </div>
+    </header>
+    <div class="content">
+        <form id="forgetPassForm">
+            <div class="input-box">
+                <input id="mobile" name="mobile" type="text" placeholder="请输入注册手机号">
+            </div>
+            <div class="input-box">
+                <input name="password" type="password" placeholder="请输入新密码">
+            </div>
+            <div class="input-box">
+                <input name="password1" type="password" placeholder="请再次输入新密码">
+            </div>
+            <div class="input-box">
+                <input class="inputList" name="verify" type="text" placeholder="请输入验证码">
+                <a id="verifyA" href="javascript:;" class="get-qr">获取验证码</a>
+            </div>
+            <div class="register">
+                <input id="updatePasswordBtn" type="button" value="修改密码">
+            </div>
+            <div class="login">
+                <input id="loginBtn" type="button" value="登录">
+            </div>
+        </form>
+    </div>
+    <div class="bottom-content">
+
+    </div>
+</body>
+<script>
+    $("#loginBtn").click(function(){
+        location.href = '/index/index/login';
+    });
+    var updatePassObj = {isCommit:false, url:'/index/user/editpass', data:''};
+    $("#updatePasswordBtn").click(function(){
+        updatePassObj.data = $('#forgetPassForm').serialize();
+        $.kingAjax(updatePassObj);
+    });
+    var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
+    $('#verifyA').click(function(){
+        verifyObj.data = {mobile:$('#mobile').val(), type:1, captcha:'ltc_captcha'};
+        getVerify('#verifyA', verifyObj);
+    });
+</script>
+</html>
