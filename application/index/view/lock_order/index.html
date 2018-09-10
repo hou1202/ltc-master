@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>锁仓计划</title>
+    <title>理财计划</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/lockdetail.css">
     <link rel="stylesheet" href="/static/index/style/public.css">
@@ -21,14 +21,14 @@
         <a href="/index/index/index">
             <img src="/static/index/image/arrow.gif">
         </a>
-        <h1>锁仓计划</h1>
+        <h1>理财计划</h1>
     </header>
     <div class="list-title">
         <a href="javascript:;">
-            锁仓计划
+            理财计划
         </a>
         <a href="/index/lock_order/orders">
-            锁仓明细
+            理财明细
         </a>
         <a href="/index/lock_order/lockdeal">
             最新成交
@@ -37,51 +37,37 @@
     <div class="price">
         <div class="circle">
             <div>
-                <p>固定LTC</p>
+                <p>固定资产</p>
                 <p>{$user['gd_money']}</p>
             </div>
             <div>
-                <p>可用LTC</p>
-                <p>{$user['ky_money']}</p>
+                <p>可用资产</p>
+                <p id="kyMoney">{$user['ky_money']}</p>
             </div>
         </div>
     </div>
     <!-- 锁仓列表开始 -->
     <div class="list-content">
         <div class="item">
-            <p>锁仓份额</p>
-            <input id="scCount" type="text" placeholder="不大于50的可用LTC数量整数" maxlength="2">
+            <p>理财数量</p>
+            <input id="scCount" type="text" placeholder="大于1小于可用资产的整数" maxlength="4">
         </div>
         <!--<div class="list">
             <p>
                 剩余份额
             </p>
-            <p id="syCount">{$selBox['sy_count']}</p>
+            <p id="syCount">{selBox['sy_count']}</p>
         </div>-->
         <div class="cate">
-            锁仓类型
+            理财类型
         </div>
         <div class="box">
-            <select>
-                <option value ="volvo">Volvo这是一个很长很长的理财计划，需要发好的真假 一起来我们</option>
-                <option value ="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+            <select id="pid" name="pid">
+                {foreach $boxs as $k=>$v}
+                    <option value ="{$v.plan_id}">USDT理财计划 {$k+1} 方案：{$v.days}天-利率{$v.rate}%</option>
+                {/foreach}
             </select>
-            <!--{foreach $boxs as $k=> $v}
-            <div class="rad-box {if condition="$k == $selBox['sel_index'] && $isSel"}current{/if} " data-id="{$v.plan_id}" data-count="{$v.sy_count}">
-                <div class="rad-test">
-                    <p>锁仓{$v.days}天</p>
-                    <p>{$v.rate}%
-                        <span>
-                                利率
-                        </span>
-                    </p>
-                    <p>{$v.hours}点开抢</p>
-                </div>
-                <input type="radio" name="q">
-            </div>
-            {/foreach}-->
+
         </div>
         <div class="item">
             <p style="color:#000000;">交易密码</p>
@@ -89,7 +75,7 @@
         </div>
         <div class="sub">
             <a id="qdBtn" href="javascript:;">
-                确认锁仓
+                确认理财
             </a>
         </div>
         <div>
@@ -168,7 +154,7 @@
             dimension: 0
         },
         series: [{
-            name: 'LTC价格',
+            name: 'USDT价格',
             type: 'line',
             smooth: true,
             data:{$moneys}
@@ -185,18 +171,22 @@
     $('#qdBtn').click(function(){
 
         var money = $('#scCount').val();
+        var kyMoney = $('#kyMoney').text();
         var password = $('#password').val();
+        var plan_id = $('#pid').val();
+        //console.log(plan_id);return false;
         if(password == '') {
             alertMsg('交易密码不能为空');return;
         }
         if (money=='') {
-            alertMsg('锁仓份额格式不正确');return;
+            alertMsg('理财数量格式不正确');return;
         }
         money = parseInt(money);
-        if (money>50 || money<0 || isNaN(money)) {
-            alertMsg('锁仓份额大于0且不能超过50');return;
+        kyMoney = parseInt(kyMoney);
+        if (money<0 || isNaN(money) || kyMoney < money) {
+            alertMsg('理财数量大于0且不能超过可用资产');return;
         }
-        scObj.data = {money:money, password:password};
+        scObj.data = {money:money, password:password,plan_id:plan_id};
         $.kingAjax(scObj,undefined,function(res){
             if (res.hasOwnProperty('data') && res.data.status == 2) {
                 $('#syCount').html(res.data.data);

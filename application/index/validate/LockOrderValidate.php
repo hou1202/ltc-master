@@ -10,7 +10,8 @@ class LockOrderValidate extends Validate
 
     protected $rule = [
         ['id', 'require|gt:0'],
-        ['money|锁仓金额', 'require|gt:0|elt:50'],
+        ['money|理财金额', 'require|gt:0'],
+        ['plan_id|理财计划', 'require|gt:0'],
         ['password|交易密码', 'require|length:6,16'],
     ];
 
@@ -19,7 +20,7 @@ class LockOrderValidate extends Validate
 
     protected $scene = [
         'detail' => ['item_id'],
-        'commit' => ['money', 'password'],
+        'commit' => ['money','plan_id', 'password'],
     ];
 
 

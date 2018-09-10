@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>锁仓详情</title>
+    <title>理财详情</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/lock.css">
     <link rel="stylesheet" href="/static/index/style/public.css">
@@ -16,14 +16,14 @@
         <a class="goBack" href="javascript:;">
             <img src="/static/index/image/arrow.gif" alt="">
         </a>
-        <h1>锁仓明细</h1>
+        <h1>理财明细</h1>
     </header>
     <div class="list-title">
         <a href="/index/lock_order/index">
-            锁仓计划
+            理财计划
         </a>
         <a href="/index/lock_order/orders">
-            锁仓明细
+            理财明细
         </a>
         <a href="/index/order">
             最新成交
@@ -32,7 +32,7 @@
     <div class="list-content">
         <ul class="userinfo">
             <li>
-                <p>锁仓数量</p>
+                <p>理财数量</p>
                 <p>{$order['money']}</p>
             </li>
             <li>
@@ -44,15 +44,15 @@
                 <p>{$order['end_date']}</p>
             </li>
             <li class="bigItem">
-                <p>锁仓时长</p>
+                <p>理财时长</p>
                 <p>{$order['days']}天</p>
             </li>
             <li>
-                <p>锁仓进度</p>
+                <p>理财进度</p>
                 <p>第{$day}天</p>
             </li>
             <li>
-                <p>锁仓利率</p>
+                <p>理财利率</p>
                 <p>{$order['rate']}%</p>
             </li>
             <li class="bigItem">
@@ -64,7 +64,7 @@
                 <p>{$order['total_income']}</p>
             </li>
             <li class="bigItem">
-                <p>锁仓状态</p>
+                <p>理财状态</p>
                 <p>{$status}</p>
             </li>
         </ul>
@@ -81,7 +81,7 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
             <a href="/index/share/index">
                 <i class="ficon3"></i>

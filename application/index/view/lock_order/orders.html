@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>锁仓明细</title>
+    <title>理财明细</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/lock.css">
     <link rel="stylesheet" href="/static/index/style/public.css">
@@ -16,14 +16,14 @@
         <a href="/index/index/index">
             <img src="/static/index/image/arrow.gif">
         </a>
-        <h1>锁仓明细</h1>
+        <h1>理财明细</h1>
     </header>
     <div class="list-title">
         <a href="/index/lock_order/index">
-            锁仓计划
+            理财计划
         </a>
         <a href="javascript:;">
-            锁仓明细
+            理财明细
         </a>
         <a href="/index/lock_order/lockdeal">
             最新成交
@@ -32,21 +32,21 @@
     <div class="price">
         <div class="circle">
             <div>
-                <p>今日锁仓收益</p>
+                <p>今日理财收益</p>
                 <p>+{$user['today_income']}</p>
             </div>
             <div>
-                <p>锁仓总收益</p>
+                <p>理财总收益</p>
                 <p>{$user['total_income']}</p>
             </div>
         </div>
     </div>
     <div class="list-content">
-        <h2>锁仓列表</h2>
+        <h2>理财列表</h2>
         <ul class="top-title">
             <li>数量</li>
             <li>开始时间</li>
-            <li>锁仓时间</li>
+            <li>理财时间</li>
             <li>状态</li>
             <li>操作</li>
         </ul>
@@ -55,12 +55,12 @@
             <li>{$v['money']}</li>
             <li>{$v['start_date']}</li>
             <li>{$v['days']}天</li>
-            <li>锁仓中</li>
+            <li>{if condition="$v['status']" }已退出{else /}理财中{/if}</li>
             <li><a href="/index/lock_order/detail/id/{$v['id']}">查看</a></li>
         </ul>
         {/foreach}
     </div>
-    <!-- 锁仓列表结束 -->
+    <!-- 理财列表结束 -->
     <div class="bottom-content">
 
     </div>
@@ -73,7 +73,7 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
             <a href="/index/share/index">
                 <i class="ficon3"></i>
