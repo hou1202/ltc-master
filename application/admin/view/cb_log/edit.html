@@ -129,9 +129,9 @@
                 layer = layui.layer;
         form.on('submit(demo)', function(data) {
 
-            if(data.field.status != 1){
+            if(data.field.status != 2){
                 if(data.field.is_kuang != "{$model['is_kuang']}"){
-                    layer.alert('非待审核状态不支持购买类型修改！',{icon:2});
+                    layer.alert('非审核通过状态不支持购买类型修改！',{icon:2});
                     return false;
                 }
             }
