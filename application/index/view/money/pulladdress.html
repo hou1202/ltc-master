@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>充币地址</title>
+    <title>购买矿机</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/pulladress.css">
     <link rel="stylesheet" href="/static/index/style/public.css">
     {include file="common/js"}
+    <script src="/static/index/lib/qrcode.js"></script>
 </head>
 
 <body>
@@ -17,29 +18,30 @@
         <a class="goBack" href="javascript:;">
             <img src="/static/index/image/arrow.gif" alt="">
         </a>
-        <h1>充币地址</h1>
+        <h1>购买矿机</h1>
     </header>
     <div class="list-title">
         <a href="/index/money/apply">
             提币申请
         </a>
         <a href="javascript:void(0)">
-            充币地址
+            购买矿机
         </a>
         <a href="/index/money/push">
             提币明细
         </a>
         <a href="/index/money/pull">
-            充币明细
+            矿机明细
         </a>
     </div>
     <div class="list-content">
+
         <form class="sub-box">
             <div class="">
-                <p>会员编号</p>
-                <p>{$user['vip_number']}</p>
+                <p>会员号</p>
+                <p>{$user['mobile']}</p>
             </div>
-            <div class="">
+            <!--<div class="">
                 <p>手机号码</p>
                 <p>{$user['mobile']}</p>
             </div>
@@ -48,32 +50,38 @@
                 <p>{$user['ky_money']}</p>
             </div>
             <div class="">
-                <p>锁仓资产</p>
+                <p>理财资产</p>
                 <p>{$user['gd_money']}</p>
+            </div>-->
+            <div class="qrcode-img">
+                <div id="qrcode"></div>
             </div>
             <div class="input-box">
-                <p>
-                    充币地址
-                </p>
-                <textarea readonly id="address" placeholder="你的充币地址">{$scAddress}</textarea>
+                <textarea readonly id="address" placeholder="购买矿机地址">{$scAddress.content}</textarea>
             </div>
         </form>
         <div class="sub">
-            <button id="commit" class="btn" type="button">{$btnTxt}</button>
+            <button id="commit" class="btn" type="button">复制地址购买矿机</button>
         </div>
         <div class="info">
             <ul>
                 <li>
-                    充币说明
+                    购买矿机说明
                 </li>
                 <li>
-                    1.外网充币建议使用比特尔，将您的LTC转入该地址。
+                    1:本矿机单台售价为500美元即500个USDT，如果需要购买多台矿机即500的整倍数。
                 </li>
                 <li>
-                    2.外网充币后至充币明细内提交充币记录，填写外网的交易ID以及充币数量，不提交的视为自动放弃充币。
+                    2:用火币、比特尔、中币等交易所向以上地址汇入USDT后至矿机明细内提交汇款记录，填写外网的交易id以及数量，不提交的视为自动放弃购买矿机。
                 </li>
                 <li>
-                    3.平台一律禁止虚假充值，发现直接将作封号处理。
+                    3:请勿向上述地址充值任何非USDT资产，否则资产将不可找回。
+                </li>
+                <li>
+                    4:最小充值金额为500USDT或500的整倍数，小于最小金额的充值将不会记录且无法退回。
+                </li>
+                <li>
+                    5:平台一律禁止虚假购买矿机，发现直接将作封号处理。
                 </li>
             </ul>
         </div>
@@ -90,11 +98,11 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
-            <a href="/index/share/index">
+            <a href="/index/money/pulladdress.html">
                 <i class="ficon3"></i>
-                <p>分享</p>
+                <p>矿机</p>
             </a>
             <a href="/index/user/index">
                 <i class="ficon4"></i>
@@ -105,25 +113,31 @@
     <!-- 底部结束 -->
 </body>
 <script>
+    $(function(){
+        //new QRCode(document.getElementById('qrcode'), 'your content');
+
+        // 设置参数方式
+        var qrcode = new QRCode('qrcode', {
+          text: "{$scAddress.content}",
+          width: 100,
+          height: 100,
+          colorDark : '#000000',
+          colorLight : '#ffffff',
+          correctLevel : QRCode.CorrectLevel.H
+        });
+
+    });
     function copyText() {
         var text = document.getElementById("address");
         text.select(); // 选择对象
         document.execCommand("Copy"); // 执行浏览器复制命令  
     }
-    var commitObj = {isCommit:false, url:'/index/money/addAddress'};
+
     $("#commit").on("click", function() {
-        if ($(this).html() == '获取充币地址') {
-            $.kingAjax(commitObj,function(res){
-                var address = res.data.address;
-                $("#address").val(address);
-                $(".btn").html("一键复制地址");
-                copyText();
-                alertMsg('复制成功');
-            })
-        } else {
+
             copyText();
             alertMsg('复制成功');
-        }
+
     });
 
     

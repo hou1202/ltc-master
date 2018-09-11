@@ -64,6 +64,7 @@ class CbLog extends AdminCheckLoginController
     {
         if($this->request->isPost()){
             $data = $this->request->post();
+            //$userId = $this->request->get('userId', 0);
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{

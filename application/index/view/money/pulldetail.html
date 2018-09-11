@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>充币详情</title>
+    <title>矿机详情</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/pull.css">
     <link rel="stylesheet" href="/static/index/style/public.css">
@@ -14,14 +14,14 @@
         div.list-title a:nth-child(4) {
             border-left: none;
             border-right: none;
-            border-top: 1px solid #216ea8;
-            border-bottom: 1px solid #216ea8;
+            border-top: 1px solid #e73d00;
+            border-bottom: 1px solid #e73d00;
             color: #ffffff;
-            background: #216ea8;
+            background: #e73d00;
         }
         div.list-title a:nth-child(3) {
             background: #fff;
-            color: #216ea8;
+            color: #e73d00;
         }
     </style>
 </head>
@@ -31,20 +31,20 @@
         <a class="goBack" href="javascript:;">
             <img src="/static/index/image/arrow.gif" alt="">
         </a>
-        <h1>充币详情</h1>
+        <h1>矿机详情</h1>
     </header>
     <div class="list-title">
         <a href="/index/money/apply">
             提币申请
         </a>
         <a href="/index/money/pulladdress">
-            充币地址
+            购买矿机
         </a>
         <a href="/index/money/push">
             提币明细
         </a>
         <a href="/index/money/pull">
-            充币明细
+            矿机明细
         </a>
     </div>
     <div class="list-content">
@@ -58,7 +58,7 @@
                 <p>{$user['mobile']}</p>
             </li>
             <li>
-                <p>充币数量</p>
+                <p>购买数量</p>
                 <p>{$cb['count']}</p>
             </li>
             <li class="bigItem">
@@ -70,8 +70,12 @@
                 <p>{$cb['c_time']}</p>
             </li>
             <li>
-                <p>充币状态</p>
+                <p>购买状态</p>
                 <p>{$status[$cb['status']]}</p>
+            </li>
+            <li>
+                <p>购买类型</p>
+                <p>{if condition="$cb['is_kuang']"} 购买矿机 {else /} 普通充币 {/if}</p>
             </li>
             <li class="bigItem">
                 <p>反馈信息</p>
@@ -91,11 +95,11 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
-            <a href="/index/share/index">
+            <a href="/index/money/pulladdress">
                 <i class="ficon3"></i>
-                <p>分享</p>
+                <p>矿机</p>
             </a>
             <a href="/index/user/index">
                 <i class="ficon4"></i>

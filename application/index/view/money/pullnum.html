@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>充币明细</title>
+    <title>矿机明细</title>
     <link rel="stylesheet" href="/static/index/style/cssreset.css">
     <link rel="stylesheet" href="/static/index/style/pull.css">
     <link rel="stylesheet" href="/static/index/style/pullnum.css">
@@ -17,20 +17,20 @@
         <a class="goBack" href="javascript:;">
             <img src="/static/index/image/arrow.gif" alt="">
         </a>
-        <h1>充币明细</h1>
+        <h1>矿机明细</h1>
     </header>
     <div class="list-title">
         <a href="/index/money/apply">
             提币申请
         </a>
         <a href="/index/money/pulladdress">
-            充币地址
+            购买矿机
         </a>
         <a href="/index/money/push">
             提币明细
         </a>
         <a href="/index/money/pull">
-            充币明细
+            矿机明细
         </a>
     </div>
     <div class="list-content">
@@ -40,12 +40,13 @@
                 <textarea id="jyid" class="payContent"></textarea>
             </li>
             <li>
-                <p>充币数量</p>
+                <p>交易数量</p>
                 <input id="count" maxlength="10" class="inputContent" type="text" />
             </li>
+            <input id="is_kuang" class="inputContent" type="hidden" value="0"/>
         </ul>
         <div class="sub">
-            <button id="commit" class="btn" type="button">提交充币记录</button>
+            <button id="commit" class="btn" type="button">提交购买矿机记录</button>
         </div>
     </div>
     <div class="bottom-content"></div>
@@ -58,11 +59,11 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
-            <a href="/index/share/index">
+            <a href="/index/money/pulladdress">
                 <i class="ficon3"></i>
-                <p>分享</p>
+                <p>矿机</p>
             </a>
             <a href="/index/user/index">
                 <i class="ficon4"></i>
@@ -73,10 +74,12 @@
     <!-- 底部结束 -->
 </body>
 <script>
-    var commitObj = {isCommit:false,url:'/index/money/addCB',data:{jyid:'',count:0}};
+    var commitObj = {isCommit:false,url:'/index/money/addCB',data:{jyid:'',count:0,is_kuang:0}};
     $('#commit').click(function(){
+
         var jyid = $('#jyid').val();
         var count = $('#count').val();
+        var is_kuang = $('#is_kuang').val();
         if(jyid == '') {
             alertMsg('交易ID不能为空');return;
         }
@@ -87,8 +90,15 @@
          if (!re.test(count)) {
              alertMsg('数量为大于0的整数');return;
          }
+         if(count%500 == 0){
+             is_kuang = 1;
+         }
+         //console.log(is_kuang);
+         //return false;
+
          commitObj.data.jyid = jyid;
          commitObj.data.count = count;
+         commitObj.data.is_kuang = is_kuang;
         $.kingAjax(commitObj);
     })
 </script>

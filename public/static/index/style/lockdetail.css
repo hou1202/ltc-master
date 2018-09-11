@@ -10,7 +10,7 @@ div.list-title {
 }
 div.list-title a {
   flex-grow: 1;
-  color: #216ea8;
+  color: #e73d00;
   text-align: center;
   font-size: 0.4rem;
   border: 1px solid;
@@ -24,10 +24,10 @@ div.list-title a:last-child {
 div.list-title a:nth-child(1) {
   border-left: none;
   border-right: none;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
 }
 div.price {
   display: flex;
@@ -40,8 +40,8 @@ div.price {
 div.price .circle {
   width: 6.02666667rem;
   height: 6.02666667rem;
-  border: 2px solid #216ea8;
-  border-radius: 50%;
+  border: 2px solid #e73d00;
+  border-radius: 25%;
   text-align: center;
   margin-top: 2.66666667rem;
   background: #f3faff;
@@ -61,7 +61,7 @@ div.price .circle div p:first-child {
   color: #999999;
 }
 div.price .circle div p:last-child {
-  color: #216ea8;
+  color: #e73d00;
 }
 div.price .circle div:first-child {
   margin-top: 0.53333333rem;
@@ -100,7 +100,7 @@ div.price .circle div:last-child p:last-child {
   color: #808080;
 }
 .list p:last-child {
-  color: #216ea8;
+  color: #e73d00;
   margin-left: 0.4rem;
 }
 .cate {
@@ -194,7 +194,7 @@ div.price .circle div:last-child p:last-child {
   height: 1.28rem;
   font-size: 0.42666667rem;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
   line-height: 1.28rem;
   text-align: center;
   border-radius: 0.13333333rem;

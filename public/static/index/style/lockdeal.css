@@ -38,7 +38,7 @@ div.list-title {
 }
 div.list-title a {
   flex-grow: 1;
-  color: #216ea8;
+  color: #e73d00;
   text-align: center;
   font-size: 0.37333333rem;
   border: 1px solid;
@@ -53,10 +53,10 @@ div.list-title a:last-child {
 div.list-title a:nth-child(3) {
   border-left: none;
   border-right: none;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
 }
 .pay-time {
   width: 100%;
@@ -91,7 +91,7 @@ div.list-title a:nth-child(3) {
   padding: 0.4rem 0;
 }
 .price {
-  color: #216ea8;
+  color: #e73d00;
 }
 .list-content {
   margin-bottom: 1.33333333rem;

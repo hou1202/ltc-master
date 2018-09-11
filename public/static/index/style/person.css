@@ -78,7 +78,7 @@ header .top-list div:nth-child(2) {
   position: relative;
 }
 .app-content .list-top a p:first-child {
-  color: #216ea8;
+  color: #e73d00;
 }
 .app-content .list-top a p:last-child {
   color: #808080;
@@ -94,6 +94,22 @@ header .top-list div:nth-child(2) {
   right: 0;
   border-left: 1px solid #f2f2f2;
   transform: translateY(-50%);
+}
+.app-content .center-line a {
+  width:100%;
+  margin:0.2rem 0;
+  color:#808080;
+  padding-bottom:0.2rem;
+  border-bottom:1px solid #e4e4e4;
+
+}
+.app-content .center-line a p{
+  float:left;
+  margin-left:0.30666666rem;
+}
+.app-content .center-line .next{
+  float:right;
+  padding-top:0.10666666rem;
 }
 .app-content .center-line::after {
   position: absolute;
@@ -130,7 +146,7 @@ header .top-list div:nth-child(2) {
   position: relative;
 }
 .app-content .list-bottom li p:first-child {
-  color: #216ea8;
+  color: #e73d00;
 }
 .app-content .list-bottom li p:last-child {
   color: #808080;

@@ -52,10 +52,10 @@
         <div class="layui-form-item">
             <div class="layui-row">
                 <div class="layui-col-md1">
-                    <label class="king-label">充币地址</label>
+                    <label class="king-label">交易ID</label>
                 </div>
                 <div class="layui-col-md5">
-                    <input type="text" value="{$address.content}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                    <input type="text" value="{$model.jyid}" autocomplete="off" readonly class="layui-input" maxlength="50">
                 </div>
             </div>
         </div>
@@ -67,6 +67,20 @@
                 </div>
                 <div class="layui-col-md5">
                     <input type="text" value="{$model.count}" autocomplete="off" readonly class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">购买类型</label>
+                </div>
+                <div class="layui-col-md5">
+                    <select name="is_kuang">
+                        <option value="1" {if condition="$model['is_kuang'] == 1"} selected{/if}>购买矿机</option>
+                        <option value="0" {if condition="$model['is_kuang'] == 0"} selected{/if}>普通充值</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -114,6 +128,19 @@
         var form = layui.form,
                 layer = layui.layer;
         form.on('submit(demo)', function(data) {
+
+            if(data.field.status != 1){
+                if(data.field.is_kuang != "{$model['is_kuang']}"){
+                    layer.alert('非待审核状态不支持购买类型修改！',{icon:2});
+                    return false;
+                }
+            }
+            /*if(data.field.is_kuang != "{$model['is_kuang']}"){
+                layer.confirm('确定更换用户购买类型？',  {icon: 3, title:'提示'}, function(){
+                    //$.kingAjax(data, "{$urlParam}");
+                });
+                return false;
+            }*/
             if(parseInt($('#status').val()) == 2) {
                 layer.alert('已通过的状态不支持修改！',{icon:2});
                 return false;

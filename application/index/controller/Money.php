@@ -26,7 +26,7 @@ class Money extends IndexController
     ];
 
     protected static $sParamsArr = [
-        'addcb' => ['jyid'=>2, 'count'=>2],
+        'addcb' => ['jyid'=>2, 'count'=>2,'is_kuang'=>2],
         'addapply' => ['mobile'=>2, 'b_id'=>2, 'count'=>2, 'address'=>2, 'payment_id'=>2, 'verify'=>2, 'password'=>2],
         'cancel'=>['id'=>2]
     ];
@@ -135,11 +135,13 @@ class Money extends IndexController
         return $this->jsonSuccess('申请成功', ['url'=>'/index/money/push']);
     }
 
+    //获取充币地址
     public function pulladdress()
     {
-        $scAddress = $this->userInfo['address_id']>0? Db::name('address')->where('id='.$this->userInfo['address_id'])->value('content'):'';
-        $this->assign('scAddress', $scAddress);
-        $this->assign('btnTxt', $this->userInfo['address_id'] == 0 ? '获取充币地址' : '一键复制地址');
+        //$scAddress = $this->userInfo['address_id']>0? Db::name('address')->where('id='.$this->userInfo['address_id'])->value('content'):'';
+        $address = Db::name('address')->field('id,content')->order('id desc')->find();
+        $this->assign('scAddress', $address);
+        //$this->assign('btnTxt', $this->userInfo['address_id'] == 0 ? '获取充币地址' : '一键复制地址');
         return $this->fetch();
     }
 

@@ -34,6 +34,7 @@
             <th lay-data="{field:'mobile'}">手机号</th>
             <th lay-data="{field:'jyid'}">交易ID</th>
             <th lay-data="{field:'count'}">数量</th>
+            <th lay-data="{templet:'#typeKuang'}">购买类型</th>
             <th lay-data="{templet:'#typeTemp'}">状态</th>
             <th lay-data="{field:'c_time',align:'center'}">创建时间</th>
             <th lay-data="{align:'center',toolbar:'#barDemo'}">操作</th>
@@ -48,6 +49,13 @@
     <span class="layui-badge-rim layui-bg-blue">已通过</span>
     {{# }else if(d.status == 3){ }}
     <span class="layui-badge-rim layui-bg-orange">已驳回</span>
+    {{# } }}
+</script>
+<script type="text/html" id="typeKuang">
+    {{# if(d.is_kuang == 1){ }}
+    <span class="layui-badge-rim layui-bg-blue">购买矿机</span>
+    {{# }else if(d.is_kuang == 0){ }}
+    <span class="layui-badge-rim">普通充币</span>
     {{# } }}
 </script>
 <script type="text/html" id="barDemo">
