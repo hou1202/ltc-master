@@ -10,7 +10,7 @@ class MoneyValidate extends Validate
 {
 
     protected $rule = [
-        ['count|数量', 'require|gt:0'],
+        ['count|数量', 'require|egt:200'],
         ['jyid|交易ID', 'require|length:1,255'],
         ['address|提币地址', 'require|length:1,255'],
         ['payment_id|PaymentID', 'length:0,255'],

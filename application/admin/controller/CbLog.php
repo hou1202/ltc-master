@@ -16,6 +16,7 @@ class CbLog extends AdminCheckLoginController
 
     public function index()
     {
+
         if ($this->request->isPost()) {
             $order = $this->request->post('sortField').' '.$this->request->post('sortType');
             $page = (int)$this->request->post('page');
@@ -47,6 +48,7 @@ class CbLog extends AdminCheckLoginController
     {
         if($this->request->isPost()){
             $data = $this->request->post();
+
             if($this->modelFactory->add($data)){
                 return $this->jsonSuccess('添加成功');
             }else{
@@ -65,6 +67,81 @@ class CbLog extends AdminCheckLoginController
         if($this->request->isPost()){
             $data = $this->request->post();
             //$userId = $this->request->get('userId', 0);
+
+            $cbLog = Db::name('cb_log')->field('id,user_id,count,is_kuang')->where('id='.$data['id'])->find();
+            if($data['is_kuang'] == 1 && $cbLog['count']%500 != 0){
+                return $this->jsonFail('购买数量非矿机基数的倍数');
+            }
+
+            //购买矿机操作
+            if($data['status'] == 2 && $data['is_kuang'] == 1){
+                //获取用户父级树
+                $user = Db::name('user')->field('user_id,parent_id,parent_ids')->where('user_id='.$cbLog['user_id'])->find();
+                //更新用户矿机数量
+
+                //如果是第一次购买矿机，更新父级直推活跃矿机用户和等级
+                $is_miner = Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
+                if(!$is_miner && !empty($user['parent_id'])){
+
+                    $parentUser = Db::name('user')->field('user_id,active_miner,grade')->where('user_id='.$user['parent_id'])->find();
+                    switch($parentUser['active_miner']+1){
+                        case 20:
+                            $grade=2;
+                            break;
+                        case 50:
+                            $grade=3;
+                            break;
+                        case 100:
+                            $grade=4;
+                            break;
+                        case 200:
+                            $grade=5;
+                            break;
+                        default:
+                            $grade = $parentUser['grade'];
+                            break;
+                    }
+                    Db::name('user')->where('user_id='.$user['parent_id'])->update([
+                        'active_miner'=>['exp', 'active_miner+1'],
+                        'grade'=>$grade,
+                    ]);
+                }
+                $miner = intval($cbLog['count']/500);
+                Db::name('user')->where('user_id='.$user['user_id'])
+                    ->update([
+                        'miner_num'=>['exp', 'miner_num+'.$miner],
+                    ]);
+                //插入矿机记录
+                Db::name('miner')->insert([
+                    'user_id'=>$cbLog['user_id'],
+                    'number'=>$miner,
+                    'c_time'=>date('Y-m-d H:i:s'),
+                    'e_time'=>date('Y-m-d H:i:s',time()+(365*24*60*60)),
+                ]);
+                //更新父级直推活跃矿机用户
+                Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
+
+
+                //判断父级树是否为空,计算用户返利
+                if($user['parent_ids'] != ''){
+                    $parentIds = explode('|', substr($user['parent_ids'], 1, count($user['parent_ids'])-2));
+                    //获取等级收益利率
+                    $rate = Db::name('config')->field('content')->where('id','in',[17,18,19,20,23,24,25,26,27,28])->order('id asc')->select();
+                    foreach($parentIds as $key =>$parent){
+                        //计算收益
+                        $parentIncome = bcmul($cbLog['count'],bcdiv($rate[$key]['content'],100,4),4);
+                        if(bccomp($parentIncome, 0, 4)>0) {
+                            Db::name('user')->where('user_id=' . $parent)->update([
+                                'share_income' => ['exp', 'share_income+' .$parentIncome],
+                                'to_share_income' => ['exp', 'to_share_income+' . $parentIncome],
+                                'ky_money'=>['exp', 'ky_money+'.$parentIncome],
+                            ]);
+                            Db::name('money_log')
+                                ->insert(['user_id'=> $parent,'order_id'=>$cbLog['id'], 'money'=>$parentIncome, 'sign'=>'+', 'remark'=>'好友收益', 'type'=>6]);
+                        }
+                    }
+                }
+            }
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{

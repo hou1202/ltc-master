@@ -24,13 +24,13 @@
             提币申请
         </a>
         <a href="/index/money/pulladdress">
-            充币地址
+            购买矿机
         </a>
         <a href="/index/money/push">
             提币明细
         </a>
         <a href="/index/money/pull">
-            充币明细
+            矿机明细
         </a>
     </div>
         <div class="user-item">
@@ -51,7 +51,7 @@
             </div>
             <div class="price-item">
                 <p>
-                    锁仓资产
+                    理财资产
                 </p>
                 <p>
                    {$user['gd_money']}
@@ -77,7 +77,7 @@
                 <p>
                     提币数量
                 </p>
-                <input id="count" name="count" type="text" placeholder="数量为不大于可用资产的整数">
+                <input id="count" name="count" type="text" placeholder="大于200且小于可用资产的整数">
             </div>
             <div class="input-text">
                 手续费： <span id="sxf" class="default">00.00 </span> (实际到账金额：<span id="dzje" class="default">00.00</span>)
@@ -141,11 +141,11 @@
             </a>
             <a href="/index/lock_order/index">
                 <i class="ficon2"></i>
-                <p>锁仓</p>
+                <p>理财</p>
             </a>
-            <a href="/index/share/index">
+            <a href="/index/money/pulladdress">
                 <i class="ficon3"></i>
-                <p>分享</p>
+                <p>矿机</p>
             </a>
             <a href="/index/user/index">
                 <i class="ficon4"></i>
@@ -212,11 +212,15 @@
     $("#commit").click(function(){
         var count = $('#count').val();
         if(count == '') {
-            alertMsg('数量不能为空');return;
+            alertMsg('提币数量不能为空');return;
         }
+
         var re = /^[1-9]+[0-9]*]*$/;
         if (!re.test(count)) {
             alertMsg('数量为大于0的整数');return;
+        }
+        if(count < 200) {
+            alertMsg('提币数量大于200的整数');return;
         }
         commitObj.data = $('#commitForm').serialize();
         $.kingAjax(commitObj);

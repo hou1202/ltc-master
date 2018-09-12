@@ -41,7 +41,7 @@ header .top-list {
   display: -webkit-flex;
   justify-content: space-around;
   align-items: center;
-  color: #cff1ff;
+  color: #fff;
   padding: 0 0.4rem;
   font-size: 0.37333333rem;
   height: 0.93333333rem;
@@ -52,9 +52,9 @@ header .top-list div {
   text-align: center;
 }
 header .top-list div:nth-child(2) {
-  border-left: 1px solid #8bb8d0;
+  border-left: 1px solid #fff;
   height: 100%;
-  border-right: 1px solid #8bb8d0;
+  border-right: 1px solid #fff;
 }
 .app-content {
   margin-top: 0.24rem;

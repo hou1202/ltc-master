@@ -10,23 +10,23 @@ div.list-title {
 }
 div.list-title a {
   width: 33.33333333%;
-  color: #216ea8;
+  color: #e73d00;
   text-align: center;
   font-size: 0.4rem;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
-  border-left: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
+  border-left: 1px solid #e73d00;
 }
 div.list-title a:first-child {
   border-radius: 0.13333333rem 0 0 0.13333333rem;
 }
 div.list-title a:last-child {
   border-radius: 0 0.13333333rem 0.13333333rem 0;
-  border-right: 1px solid #216ea8;
+  border-right: 1px solid #e73d00;
 }
 div.list-title a:nth-child(2) {
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
 }
 .list-content {
   margin-top: 0.53333333rem;
@@ -87,7 +87,7 @@ div.list-title a:nth-child(2) {
 .sub-box div .huoqu {
   width: 2rem;
   height: 0.8rem;
-  background: #216ea8;
+  background: #e73d00;
   color: #ffffff;
   text-align: center;
   line-height: 0.8rem;
@@ -109,7 +109,7 @@ div.sub .btn {
   height: 1.28rem;
   border: none;
   outline: none;
-  background: #216ea8;
+  background: #e73d00;
   font-size: 0.42666667rem;
   color: #ffffff;
   border-radius: 0.13333333rem;

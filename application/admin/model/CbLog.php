@@ -45,33 +45,6 @@ class CbLog extends BaseAdminModel
         if($data['status'] == 2) {
             //判断是否为购买矿机
             if($data['is_kuang'] == 1){
-                //获取用户父级树
-                $user = Db::name('user')->field('user_id,parent_ids')->where('user_id='.$this->user_id)->find();
-                //判断父级树是否为空
-                if($user['parent_ids'] == ''){
-                    $parentIds = explode('|', substr($user['parent_ids'], 1, count($user['parent_ids'])-2));
-                    //获取等级收益利率
-                    $rate = Db::name('config')->field('content')->where('id','in',[17,18,19,20,23,24,25,26,27,28])->order('id asc')->select();
-                    foreach($parentIds as $key =>$parent){
-                        //计算收益
-                        $parentIncome = bcmul($this->count,bcdiv($rate[$key]['content'],100,4),4);
-                        if(bccomp($parentIncome, 0, 4)>0) {
-                            Db::name('user')->where('user_id=' . $parent)->update([
-                                'share_income' => ['exp', 'share_income+' .$parentIncome],
-                                'to_share_income' => ['exp', 'to_share_income+' . $parentIncome],
-                                'ky_money'=>['exp', 'ky_money+'.$parentIncome],
-                            ]);
-                            Db::name('money_log')
-                                ->insert(['user_id'=> $parent,'order_id'=>$this->id, 'money'=>$parentIncome, 'sign'=>'+', 'remark'=>'好友收益', 'type'=>6]);
-
-                        }
-                    }
-                }
-
-                //更新矿机数量
-                $miner = intval($this->count/500);
-
-                var_dump($miner);die;
 
                 $this->save($data);
 

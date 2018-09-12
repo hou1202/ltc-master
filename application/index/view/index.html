@@ -49,11 +49,18 @@
                 </li>
                 <li>
                     <p>等级</p>
-                    <p>￥{$price}</p>
+                    <p>{switch name="$user['grade']"}
+                        {case value="1"}普通会员{/case}
+                        {case value="2"}金牌会员{/case}
+                        {case value="3"}白金会员{/case}
+                        {case value="4"}钻石会员{/case}
+                        {case value="5"}至尊会员{/case}
+                        {default /}普通会员
+                    {/switch}</p>
                 </li>
                 <li>
                     <p>矿机数量</p>
-                    <p>{$user['gd_money']}</p>
+                    <p>{$user['miner_num']}</p>
                 </li>
             </ul>
             <ul>
@@ -62,8 +69,8 @@
                     <p id="kyMoney">{$user['ky_money']}</p>
                 </li>
                 <li>
-                    <p>LTC价格</p>
-                    <p>￥{$price}</p>
+                    <p>USDT价格</p>
+                    <p>{$price}</p>
                 </li>
                 <li>
                     <p>理财资产</p>

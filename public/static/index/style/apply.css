@@ -15,7 +15,7 @@ div.btn-box .btn-pull {
   border: none;
   outline: none;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
   font-size: 0.34666667rem;
   border-radius: 0.13333333rem;
 }
@@ -31,27 +31,27 @@ div.list-title {
 }
 div.list-title a {
   width: 25%;
-  color: #216ea8;
+  color: #e73d00;
   text-align: center;
   font-size: 0.37333333rem;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
-  border-left: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
+  border-left: 1px solid #e73d00;
 }
 div.list-title a:first-child {
   border-radius: 0.13333333rem 0 0 0.13333333rem;
 }
 div.list-title a:last-child {
   border-radius: 0 0.13333333rem 0.13333333rem 0;
-  border-right: 1px solid #216ea8;
+  border-right: 1px solid #e73d00;
 }
 div.list-title a:nth-child(1) {
   border-left: none;
   border-right: none;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
 }
 .user-item {
   display: flex;
@@ -68,7 +68,7 @@ div.list-title a:nth-child(1) {
   display: block;
   width: 1.06666667rem;
   height: 1.06666667rem;
-  background: #216ea8;
+  background: #e73d00;
   border-radius: 50%;
 }
 .user-text {
@@ -98,7 +98,7 @@ div.list-title a:nth-child(1) {
   margin-bottom: 0.26666667rem;
 }
 .default {
-  color: #216ea8;
+  color: #e73d00;
 }
 .input-item {
   display: flex;
@@ -186,8 +186,8 @@ div.list-title a:nth-child(1) {
   line-height: 0.64rem;
   text-align: center;
   border-radius: 0.33333333rem;
-  border: 1px solid #216ea8;
-  color: #216ea8;
+  border: 1px solid #e73d00;
+  color: #e73d00;
   font-size: 0.32rem;
   margin-left: 0.4rem;
   padding: 0 0.2rem;
@@ -207,7 +207,7 @@ div.sub .btn {
   height: 1.28rem;
   border: none;
   outline: none;
-  background: #216ea8;
+  background: #e73d00;
   font-size: 0.42666667rem;
   color: #ffffff;
   border-radius: 0.13333333rem;

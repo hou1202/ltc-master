@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 
 use app\common\controller\AdminCheckLoginController;
+use think\Request;
 
 class Config extends AdminCheckLoginController
 {
@@ -19,5 +20,6 @@ class Config extends AdminCheckLoginController
             return $this->fetch('/config');
         }
     }
+
 
 }
