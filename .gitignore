@@ -2,3 +2,4 @@
 composer.lock
 *.log
 /config/config.php
+/public/uploads/
