@@ -26,7 +26,7 @@ class File extends AdminCheckLoginController
                 return $this->jsonFail($result);
             }
             $data = $this->request->post();
-            $result['img'] = 'http://'.str_replace('\\', '/', $result['img']);
+            $result['img'] = str_replace('\\', '/', $result['img']);
             $data['url'] = $result['img'];
             $data['src'] = substr($result['img'], strpos($result['img'], '/uploads'));
             if ($this->modelFactory->add($data)) {
