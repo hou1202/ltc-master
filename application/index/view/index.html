@@ -27,17 +27,13 @@
                     </P>
                 </div>
             </div>
-            {if condition="$hasSign"}
-            <a id="signBtn" href="javascript:;" class="sign">
-                <i class="sign-image"></i>
-                <span id="signSpan">{if condition="$isSign"}已签到{else /}签到{/if}</span>
-            </a>
+
             {/if}-->
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/static/index/image/banner1.jpg"></div>
-                    <div class="swiper-slide"><img src="/static/index/image/banner2.jpg"></div>
-                    <div class="swiper-slide"><img src="/static/index/image/banner3.jpg"></div>
+                    {foreach $banner as $b}
+                        <div class="swiper-slide"><img src="{$b.poster}"></div>
+                    {/foreach}
                 </div>
             </div>
         </div>
@@ -139,29 +135,7 @@
             {/foreach}
         </div>
     </div>
-    <!--<div class="member">
-        <h2>
-            <i class="hicon2"></i>
-            <span>新会员注册排名</span>
-        </h2>
-        <div class="swiper-container huiyuan">
-            <div class="swiper-wrapper">
-                {foreach name='orders' item='i'}
-                <div class="swiper-slide list-new">
-                    <a href="javascript:;">
-                       
 
-                      
-                        <p>
-                            新注册会员【{$i['vip_number']}】成功锁币{$i['money']}
-                        </p>
-                    </a>
-                </div>
-                {/foreach}
-            </div>
-        </div>
-    </div>-->
-    <input type="hidden" id="orderCount" value="{:count($orders)}">
     <div class="bottom-content">
 
     </div>
@@ -196,17 +170,6 @@
             autoplay: true
         });
     }
-    var signData = { url :'/index/user/sign',isCommit:false,data:''};
-    $('#signBtn').click(function(){
-        if($('#signSpan').html() != '签到'){
-            return;
-        }
-        $.kingAjax(signData, function(res){
-            $('#signSpan').html('已签到');
-            $('#kyMoney').html(res.data.ky_money);
-            alertMsg(res.msg);
-        });
-    });
 
     var mySwipers = new Swiper('.swiper-container', {
         autoplay: true,//可选选项，自动滑动

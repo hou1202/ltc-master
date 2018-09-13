@@ -39,11 +39,13 @@ class User extends IndexController
 
     public function income()
     {
-        $date = date('Y-m-d 00:00:00');
+        /*$date = date('Y-m-d 00:00:00');
         $signIncome = Db::name('money_log')->where('user_id='.$this->userId.' AND type=0 AND c_time>=\''.$date.'\'')->value('money');
         empty($signIncome) && $signIncome = 0;
         $totalIncome = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4), $signIncome, 4);
-        $this->assign(['signIncome'=>$signIncome, 'totalIncome'=>$totalIncome]);
+        */
+        $totalIncome = bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4);
+        $this->assign(['totalIncome'=>$totalIncome]);
         return $this->fetch();
     }
 
@@ -80,10 +82,12 @@ class User extends IndexController
      */
     public function index(){
         $shareFriend = (int)Db::name('user')->where('parent_id='.$this->userId)->count();
-        $date = date('Y-m-d 00:00:00');
+        /*$date = date('Y-m-d 00:00:00');
         $signIncome = Db::name('money_log')->where('user_id='.$this->userId.' AND type=0 AND c_time>=\''.$date.'\'')->value('money');
         empty($signIncome) && $signIncome = 0;
         $incomeMoney = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4), $signIncome, 4);
+        */
+        $incomeMoney = bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4);
         $this->assign(['shareFriend'=>$shareFriend, 'incomeMoney'=>$incomeMoney]);
         return $this->fetch();
     }

@@ -16,13 +16,28 @@ class Banner extends AdminCheckLoginController
 
     public function index()
     {
-        $assign['page'] = $this->request->get('page', 1);
-        $assign['sortType'] = $this->request->get('sortType', 'desc');
-        $assign['sortField'] = $this->request->get('sortField', $this->view->primaryKey);
-        $assign['searchName'] = $this->request->get('searchName','');
-        $assign['searchDate'] = $this->request->get('searchDate','');
-        $this->assign($assign);
-        return $this->fetch();
+
+        if ($this->request->isPost()) {
+            $order = $this->request->post('sortField').' '.$this->request->post('sortType');
+            $page = (int)$this->request->post('page');
+            $limit = (int)$this->request->post('limit');
+            $name = $this->request->post('searchName', '');
+            $where = 'is_del=0';
+            !empty($name) && $where .= ' AND title like \'%'.$name.'%\'';
+
+            $totalCount = $this->model->totalCount($where);
+            $list = $totalCount > 0 ? $this->model->index($where, $page, $limit, $order) : [];
+            $data = ['code' => 0, 'msg' => 'Success', 'data' => $list, 'count' => $totalCount];
+            return $this->json($data);
+        } else {
+            $assign['page'] = $this->request->get('page', 1);
+            $assign['sortType'] = $this->request->get('sortType', 'desc');
+            $assign['sortField'] = $this->request->get('sortField', $this->view->primaryKey);
+            $assign['searchName'] = $this->request->get('searchName','');
+            $assign['searchDate'] = $this->request->get('searchDate','');
+            $this->assign($assign);
+            return $this->fetch();
+        }
 
     }
 
@@ -45,17 +60,13 @@ class Banner extends AdminCheckLoginController
     {
         if($this->request->isPost()){
             $data = $this->request->post();
-            //$userId = $this->request->get('userId', 0);
-
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{
                 return $this->jsonFail('修改失败');
             }
         }else{
-            $user =  Db::name('user')->where('user_id='.$this->model->user_id)->find();
-            $this->assign('user',$user);
-            $this->assign('address', Db::name('address')->where('id='.$user['address_id'])->find());
+
             return $this->fetch();
         }
     }

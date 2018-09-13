@@ -14,6 +14,15 @@ header div {
   line-height: 1.06666667rem;
   font-size: 0.42666667rem;
 }
+.logo{
+  text-align:center;
+  height:3rem;
+  line-height:3rem;
+  margin: 1rem 0;
+}
+.logo img{
+  width:50%;
+}
 .content {
   padding: 0 0.4rem;
 }

@@ -58,6 +58,10 @@
                 <p>注册时间</p>
                 <p>{$user['c_time']}</p>
             </div>
+            <div class="">
+                <p>会员昵称</p>
+                <input name="nick_name" value="{$user['nick_name']}" type="text" placeholder="请输入会员昵称">
+            </div>
             <div>
                 <p>
                     开户行
@@ -124,7 +128,7 @@
 </body>
 <script>
     
-    function showImage(obj) {
+    /*function showImage(obj) {
         var file = obj.files[0];
         var reader = new FileReader();
         reader.readAsDataURL(file);
@@ -134,7 +138,7 @@
         uploadFile(file, 'p_user', 'poster', 0, function(res){
             $('input[name=poster]').val(res.data.url);
         });
-    }
+    }*/
     var updateObj = {isCommit:false,url:'/index/user/update',data:''};
     $('#editInfo').click(function(){
         //判断银行卡号是否正确

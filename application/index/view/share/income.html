@@ -47,16 +47,16 @@
         <h2>分享明细</h2>
         <ul class="top-title">
             <li>好友</li>
-            <li>数量</li>
-            <li>锁仓时间</li>
+            <li>矿机数量</li>
+            <li>购买时间</li>
             <li>收益</li>
         </ul>
         {foreach $logs as $v}
         <ul class="list-item">
-            <li>{$v['vip_number']}</li>
-            <li>{$v['money']}</li>
-            <li>{$v['days']}天</li>
-            <li>{$v['income']}</li>
+            <li>{if condition="empty($v['nick_name'])"}{$v['vip_number']}{else /} {$v['nick_name']}{/if}</li>
+            <li>{$v['number']}</li>
+            <li>{$v['c_time']}天</li>
+            <li>{$v['income']|round=1}</li>
         </ul>
         {/foreach}
     </div>

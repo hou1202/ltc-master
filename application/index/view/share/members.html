@@ -41,7 +41,7 @@
         {foreach $friends as $v}
         <ul class="list-item">
             <li>
-                <p>{$v['vip_number']}</p>
+                <p>{if condition="empty($v['nick_name'])"}{$v['vip_number']}{else /} {$v['nick_name']}{/if}</p>
             </li>
             <li>{$v['c_time']}</li>
             <li>{$v['zt_count']}</li>

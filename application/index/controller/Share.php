@@ -27,7 +27,7 @@ class Share extends IndexController
     }
 
     public function members(){
-        $friends = Db::name('user')->field('user_id,c_time,group_count,hy_count,zt_count,vip_number')
+        $friends = Db::name('user')->field('user_id,nick_name,c_time,group_count,hy_count,zt_count,vip_number')
             ->where('parent_id='.$this->userId)
             ->order('user_id asc')
             ->select();
@@ -41,8 +41,8 @@ class Share extends IndexController
     public function income()
     {
         $logs = Db::name('money_log')->alias('l')
-            ->field('l.money as income,u.user_id,u.c_time,o.money,o.days,u.vip_number')
-            ->join('p_lock_order o', 'o.id=l.order_id')
+            ->field('l.money as income,u.user_id,u.nick_name,o.number,o.c_time,u.vip_number')
+            ->join('p_miner o', 'o.id=l.order_id')
             ->join('p_user u', 'u.user_id=o.user_id')
             ->where('l.user_id='.$this->userId.' AND type=6')
             ->select();

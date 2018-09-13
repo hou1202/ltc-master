@@ -25,7 +25,7 @@
             <div>
                 <img class="id-head" src="/static/index/image/id.gif" alt="">
                 <span>
-                        {$user['vip_number']}
+                    {if condition="empty($user['nick_name'])"}{$user['vip_number']}{else /} {$user['nick_name']}{/if}
                 </span>
             </div>
         </div>

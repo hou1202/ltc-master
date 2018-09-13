@@ -24,9 +24,9 @@
     <table class="layui-table" lay-data="{ url:'{$loadUrl}',page:{ curr:{$page},limit:20,layout:['prev','page','next','count','skip']},id:'tIndex',method:'POST',height:'full-100',initSort:{ field:'{$sortField}',type:'{$sortType}' },where:{sortField:'{$sortField}',type:'{$sortType}',searchName:'{$searchName}',searchDate:'{$searchDate}' }}" lay-filter="tIndex">
         <thead>
         <tr>
-            <th lay-data="{field:'id',sort:true,width:80}">ID</th>
+            <th lay-data="{field:'id',sort:true}">ID</th>
             <th lay-data="{field:'title'}">标题</th>
-            <th lay-data="{field:'img',align:'center',width:200}">图片</th>
+            <th lay-data="{field:'poster'}">图片地址</th>
             <th lay-data="{templet:'#bStatus'}">状态</th>
             <th lay-data="{align:'center',toolbar:'#barDemo'}">操作</th>
         </tr>

@@ -75,9 +75,23 @@ class CbLog extends AdminCheckLoginController
 
             //购买矿机操作
             if($data['status'] == 2 && $data['is_kuang'] == 1){
-                //获取用户父级树
+                //获取用户信息和父级树
                 $user = Db::name('user')->field('user_id,parent_id,parent_ids')->where('user_id='.$cbLog['user_id'])->find();
+
+                //矿机数量
+                $miner = intval($cbLog['count']/500);
+                //插入矿机记录
+                $miner_id = Db::name('miner')->insertGetId([
+                    'user_id'=>$cbLog['user_id'],
+                    'number'=>$miner,
+                    'c_time'=>date('Y-m-d H:i:s'),
+                    'e_time'=>date('Y-m-d H:i:s',time()+(365*24*60*60)),
+                ]);
                 //更新用户矿机数量
+                Db::name('user')->where('user_id='.$user['user_id'])
+                    ->update([
+                        'miner_num'=>['exp', 'miner_num+'.$miner],
+                    ]);
 
                 //如果是第一次购买矿机，更新父级直推活跃矿机用户和等级
                 $is_miner = Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
@@ -106,20 +120,6 @@ class CbLog extends AdminCheckLoginController
                         'grade'=>$grade,
                     ]);
                 }
-                $miner = intval($cbLog['count']/500);
-                Db::name('user')->where('user_id='.$user['user_id'])
-                    ->update([
-                        'miner_num'=>['exp', 'miner_num+'.$miner],
-                    ]);
-                //插入矿机记录
-                Db::name('miner')->insert([
-                    'user_id'=>$cbLog['user_id'],
-                    'number'=>$miner,
-                    'c_time'=>date('Y-m-d H:i:s'),
-                    'e_time'=>date('Y-m-d H:i:s',time()+(365*24*60*60)),
-                ]);
-                //更新父级直推活跃矿机用户
-                Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
 
 
                 //判断父级树是否为空,计算用户返利
@@ -137,11 +137,13 @@ class CbLog extends AdminCheckLoginController
                                 'ky_money'=>['exp', 'ky_money+'.$parentIncome],
                             ]);
                             Db::name('money_log')
-                                ->insert(['user_id'=> $parent,'order_id'=>$cbLog['id'], 'money'=>$parentIncome, 'sign'=>'+', 'remark'=>'好友收益', 'type'=>6]);
+                                ->insert(['user_id'=> $parent,'order_id'=>$miner_id, 'money'=>$parentIncome, 'sign'=>'+', 'remark'=>'好友收益', 'type'=>6]);
                         }
                     }
                 }
+                var_dump($miner_id);die;
             }
+
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{
