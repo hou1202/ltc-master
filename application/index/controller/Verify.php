@@ -16,7 +16,7 @@ class Verify extends IndexController
     ];
 
     public function get(){
-        var_dump(1);die;
+        
         $verifyModel = new VerifyModel();
         $logData = $this->requestData;
         unset($logData['captcha']);
