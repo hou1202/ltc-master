@@ -32,8 +32,8 @@
             <th lay-data="{field:'user_id',sort:true,width:80}">ID</th>
             <th lay-data="{field:'real_name'}">真实姓名</th>
             <th lay-data="{field:'mobile'}">手机号</th>
-            <th lay-data="{field:'identity_number'}">身份证号码</th>
             <th lay-data="{field:'invitation_code'}">邀请码</th>
+            <th lay-data="{field:'miner_num'}">矿机数量</th>
             <th lay-data="{field:'ky_money'}">可用资产</th>
             <th lay-data="{field:'gd_money'}">固定资产</th>
             <th lay-data="{templet:'#statusTemp',align:'center',width:80}">状态</th>
@@ -53,7 +53,6 @@
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-warm layui-btn-sm" lay-event="addMoney">添加/减少金币</a>
-    <a class="layui-btn layui-btn-sm" lay-event="signLog">签到记录</a>
     {{# var type= parseInt(d.is_del);if(type == 0){ }}
     <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">禁用</a>
     {{#  } else{ }}
@@ -92,8 +91,6 @@
                 layer.confirm('真的恢复改用户正常使用吗？', function(index){layer.close(index);$.kingAjaxNotJump('./del', data, function(data){table.reload('tIndex', {initSort: obj,where:$('#searchForm').serializeJson()});;});});
             } else if(layEvent == 'addMoney') {
                 window.parent.app.openIframe({ url:'/admin/money_log/add.html?userId='+data.user_id, icon:'', title:'添加金币', id:'money_log'+data.user_id});
-            }else if(layEvent == 'signLog') {
-                window.parent.app.openIframe({ url:'/admin/user_sign/index.html?userId='+data.user_id, icon:'', title:data.real_name+'('+data.mobile+')-签到记录', id:'sign_log'+data.user_id});
             }
         });
         table.on('edit(tIndex)', function(obj){

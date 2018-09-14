@@ -48,7 +48,7 @@ class Index extends IndexController
         $news = Db::name('news')->field('news_id,title,date_format(c_time, \'%Y-%m-%d\') as c_time')->limit(3)
             ->where('is_del=0')->order('news_id desc')->select();
         $price = Db::name('money_price')->where('is_del=0')->order('id desc')->value('price');
-        $banner = Db::name('banner')->where('is_del=0')->order('id desc')->select();
+        $banner = Db::name('banner')->where('is_del=0 and status=1')->order('id desc')->select();
         /*$isSign =  Db::name('user_sign')->where(['user_id'=>$this->userId, 'sign_date'=>date('Y-m-d')])->count();
         $hasSign = $sign<$today ? 0 : 1;*/
         /*$orders = Db::name('lock_order')->alias('o')

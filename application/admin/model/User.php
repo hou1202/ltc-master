@@ -33,7 +33,7 @@ class User extends BaseAdminModel
     {
         $offset = ($page-1)*$limit;
         return $this->alias('u')
-            ->field('u.user_id,u.real_name,u.mobile,u.c_time,u.ky_money,u.gd_money,u.invitation_code,u.identity_number,u.is_del')
+            ->field('u.user_id,u.real_name,u.mobile,u.c_time,u.ky_money,u.gd_money,u.invitation_code,u.identity_number,u.is_del,u.miner_num,u.grade')
             ->where($where)
             ->limit($offset, $limit)
             ->order($order)

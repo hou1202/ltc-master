@@ -29,6 +29,18 @@
 
     <form class="layui-form" action="{$loadUrl}">
         <input type="hidden" name="{$primaryKey}" value="{$model[$primaryKey]}">
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">用户昵称</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" name="real_name" value="{$model.nick_name}" lay-verify="required" autocomplete="off" placeholder="请输入用户昵称" class="layui-input" maxlength="50">
+                </div>
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <div class="layui-row">
                 <div class="layui-col-md1">
@@ -127,6 +139,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">矿机数量</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.miner_num}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">用户等级</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{switch name='$model.grade'}
+                                                {case value='1'}普通会员{/case}
+                                                {case value='2'}金牌会员{/case}
+                                                {case value='3'}白金会员{/case}
+                                                {case value='4'}钻石会员{/case}
+                                                {case value='5'}至尊会员{/case}
+                                                {default /}普通会员
+                                            {/switch}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <label class="king-label">邀请码</label>
+                </div>
+                <div class="layui-col-md5">
+                    <input type="text" value="{$model.invitation_code}" readonly autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
 
 
         <div class="layui-form-item">
