@@ -141,9 +141,10 @@ class CbLog extends AdminCheckLoginController
                         }
                     }
                 }
-                var_dump($miner_id);die;
+
             }
 
+            
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{
