@@ -65,11 +65,13 @@ div.list-title a:nth-child(1) {
   width: 50%;
   height: 0.8rem;
   border: none;
+  text-align:right;
 }
 .sub-box div input {
   width: 50%;
   height: 0.8rem;
   border: none;
+  text-align:right;
 }
 .sub-box div .huoqu {
   width: 50%;

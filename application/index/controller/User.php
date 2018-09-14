@@ -34,7 +34,7 @@ class User extends IndexController
         'editpass'=>['mobile'=>2, 'password'=>2, 'password1'=>2, 'verify'=>2],
         'tradepass'=>['mobile'=>2, 'trade_password'=>2, 'trade_password1'=>2, 'verify'=>2],
         'reg'=>['mobile'=>2, 'password'=>2, 'password1'=>2, 'verify'=>2, 'trade_password'=>2,'trade_password1'=>2, 'invitation_code'=>2],
-        'update'=>['bank_id'=>2, 'real_name'=>2, 'bank_number'=>2, 'verify'=>2, 'bank_zh_name'=>2,'alipay_number'=>2, 'poster'=>2, 'mobile'=>2],
+        'update'=>['bank_id'=>2, 'real_name'=>2, 'nick_name'=>2,'bank_number'=>2, 'verify'=>2, 'bank_zh_name'=>2,'alipay_number'=>2, 'poster'=>2, 'mobile'=>2],
     ];
 
     public function income()

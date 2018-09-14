@@ -163,7 +163,9 @@
             return false;
         }
 
+
         updateObj.data = $('#userinfo').serialize();
+        //console.log(updateObj.data);return false;
         $.kingAjax(updateObj,function(){
             location.reload();
         });
