@@ -144,7 +144,7 @@ class CbLog extends AdminCheckLoginController
 
             }
 
-            
+
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
             }else{

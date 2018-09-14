@@ -384,7 +384,7 @@ class User
         }
         $min = ($length+1)*10;
         $max = ($length+2)*10 -1;
-            $data['vip_number'] = 'LTC'.date('y').$time.mt_rand(10,99).mt_rand($min,$max);
+            $data['vip_number'] = 'USDT'.date('y').$time.mt_rand(10,99).mt_rand($min,$max);
             $userId = static::add($data);
             if($userId>0){
                 VerifyModel::flushVerify($verify, VerifyModel::TYPE_REG, $data['mobile']);

@@ -10,27 +10,27 @@ div.list-title {
 }
 div.list-title a {
   width: 20%;
-  color: #216ea8;
+  color: #e73d00;
   text-align: center;
   font-size: 0.4rem;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
-  border-left: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
+  border-left: 1px solid #e73d00;
 }
 div.list-title a:first-child {
   border-radius: 0.13333333rem 0 0 0.13333333rem;
 }
 div.list-title a:last-child {
   border-radius: 0 0.13333333rem 0.13333333rem 0;
-  border-right: 1px solid #216ea8;
+  border-right: 1px solid #e73d00;
 }
 div.list-title a:nth-child(1) {
   border-left: none;
   border-right: none;
-  border-top: 1px solid #216ea8;
-  border-bottom: 1px solid #216ea8;
+  border-top: 1px solid #e73d00;
+  border-bottom: 1px solid #e73d00;
   color: #ffffff;
-  background: #216ea8;
+  background: #e73d00;
 }
 .list-content {
   margin-top: 0.66666667rem;
@@ -77,7 +77,7 @@ div.list-title a:nth-child(1) {
   width: 25%;
 }
 .list-content .list-item li:last-child a {
-  color: #216ea8;
+  color: #e73d00;
 }
 .list-content .list-item li p {
   display: inline-block;
@@ -97,8 +97,8 @@ div.price {
 div.price .circle {
   width: 6.02666667rem;
   height: 6.02666667rem;
-  border: 2px solid #216ea8;
-  border-radius: 50%;
+  border: 2px solid #e73d00;
+  border-radius: 25%;
   text-align: center;
   margin-top: 2.66666667rem;
   background: #f3faff;
@@ -118,7 +118,7 @@ div.price .circle div p:first-child {
   color: #999999;
 }
 div.price .circle div p:last-child {
-  color: #216ea8;
+  color: #e73d00;
 }
 div.price .circle div:first-child {
   margin-top: 0.53333333rem;
@@ -144,7 +144,7 @@ div.price .circle div:last-child p:last-child {
   border-radius: 0.10666667rem;
   width: 6.66666667rem;
   height: 5.33333333rem;
-  border: 1px solid #216ea8;
+  border: 1px solid #e73d00;
 }
 .alertBox p {
   font-size: 0.4rem;
@@ -168,7 +168,7 @@ div.price .circle div:last-child p:last-child {
   width: 2rem;
   height: 0.66666667rem;
   border-radius: 0.10666667rem;
-  background: #216ea8;
+  background: #e73d00;
   color: #ffffff;
   font-size: 0.4rem;
   text-align: center;
@@ -178,8 +178,8 @@ div.price .circle div:last-child p:last-child {
   width: 2rem;
   height: 0.66666667rem;
   border-radius: 0.10666667rem;
-  border: 1px solid #216ea8;
-  color: #216ea8;
+  border: 1px solid #e73d00;
+  color: #e73d00;
   font-size: 0.4rem;
   text-align: center;
   line-height: 0.66666667rem;
