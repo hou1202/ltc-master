@@ -82,7 +82,7 @@ return [
         'notify_url' => 'https://sharechain.min-ji.com/index/callback/wx',
     ],
 
-    'upload_file_domain' => 'web.ltcm.com',
+    'upload_file_domain' => 'http://web.ltcm.com',
 
     // +----------------------------------------------------------------------
     // | jpush 设置

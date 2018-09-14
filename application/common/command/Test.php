@@ -35,7 +35,7 @@ class Test extends Command
         //获取收益
         //$sys = Db::name('config')->field('content')->where('id in(17,18,19,20)')->order('id asc')->select();
 
-        //遍历订单
+        //遍历订单,计算用户理财收益
         foreach($incomeOrders as $v){
             /*//获取用户父级树
             $parentIds = Db::name('user')->where('user_id='.$v['user_id'])->value('parent_ids');
@@ -111,7 +111,7 @@ class Test extends Command
                     'today_income'=>['exp', 'today_income+'.$v['income']],
                 ]);
             Db::name('money_log')
-                ->insert(['user_id'=> $v['user_id'], 'order_id'=>$v['id'], 'money'=>$v['income'], 'sign'=>'+', 'remark'=>'锁仓收益', 'type'=>4]);
+                ->insert(['user_id'=> $v['user_id'], 'order_id'=>$v['id'], 'money'=>$v['income'], 'sign'=>'+', 'remark'=>'理财收益', 'type'=>4]);
 
         }
 
@@ -126,7 +126,7 @@ class Test extends Command
                     'ky_money'=>['exp', 'ky_money+'.$v['money']],
                     'gd_money'=>['exp', 'gd_money-'.$v['money']]
                 ]);
-            Db::name('money_log')->insert(['user_id'=>$v['user_id'], 'order_id'=>$v['id'], 'money'=>$v['money'], 'sign'=>'+', 'remark'=>'锁仓到期', 'type'=>5]);
+            Db::name('money_log')->insert(['user_id'=>$v['user_id'], 'order_id'=>$v['id'], 'money'=>$v['money'], 'sign'=>'+', 'remark'=>'理财到期', 'type'=>5]);
             Db::name('lock_order')->where('id='.$v['id'])->update(['status'=>1]);
         }
 
