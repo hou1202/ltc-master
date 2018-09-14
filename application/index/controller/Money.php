@@ -110,6 +110,9 @@ class Money extends IndexController
 
     public function addApply()
     {
+        if($this->requestData['password'] < 200){
+            return $this->jsonFail('数量不得小于200');
+        }
         if (User::makePassword($this->requestData['password']) != $this->userInfo['trade_password']){
             return $this->jsonFail('交易密码不正确');
         }
