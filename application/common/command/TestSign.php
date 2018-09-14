@@ -19,7 +19,7 @@ class TestSign extends Command
     protected function configure()
     {
 
-        $this->setName('test')->setDescription('Here is the remark');
+        $this->setName('test_sign')->setDescription('Here is the remark');
     }
 
     protected function execute(Input $input, Output $output)
@@ -29,7 +29,7 @@ class TestSign extends Command
         $output->writeln("TestCommand:");
             Db::name('user_sign')->insert([
                 'user_id'=>12,
-                'sign_data'=>'2000-01-01',
+                'sign_date'=>'2000-01-01',
             ]);
         // 定时器需要执行的内容
         // .....
