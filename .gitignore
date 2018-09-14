@@ -3,7 +3,7 @@ composer.lock
 *.log
 /config/config.php
 /public/uploads/
-!/public/uploads/qrcode
+!/public/uploads/qrcode/
 !/public/ueditorupload
 !/public/ueditorupload/image
 
