@@ -44,7 +44,8 @@ class User extends IndexController
         empty($signIncome) && $signIncome = 0;
         $totalIncome = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4), $signIncome, 4);
         */
-        $totalIncome = bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4);
+
+        $totalIncome = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4),$this->userInfo['to_miner_income'],4);
         $this->assign(['totalIncome'=>$totalIncome]);
         return $this->fetch();
     }
@@ -87,7 +88,7 @@ class User extends IndexController
         empty($signIncome) && $signIncome = 0;
         $incomeMoney = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4), $signIncome, 4);
         */
-        $incomeMoney = bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4);
+        $incomeMoney = bcadd(bcadd($this->userInfo['to_share_income'],$this->userInfo['today_income'], 4),$this->userInfo['to_miner_income'],4);
         $this->assign(['shareFriend'=>$shareFriend, 'incomeMoney'=>$incomeMoney]);
         return $this->fetch();
     }

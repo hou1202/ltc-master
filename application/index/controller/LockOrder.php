@@ -15,6 +15,8 @@ class LockOrder extends IndexController
         'orders'=>5,
         'detail'=>5,
         'lockdeal'=>5,
+        'miner'=>5,
+        'minerdetail'=>5,
     ];
 
     protected static $sParamsArr =[
@@ -156,6 +158,32 @@ class LockOrder extends IndexController
         $day = bcdiv((strtotime(date('Y-m-d')) - strtotime($order['start_date'])), 86400);
         $currentIncome = bcmul(bcmul($day, bcdiv($order['rate'], 100, 4), 4),$order['money'],4);
         $this->assign(['order'=>$order, 'status'=>$status, 'day'=>$day, 'currentIncome'=>$currentIncome]);
+        return $this->fetch();
+    }
+
+    public function miner(){
+        $miners = Db::name('miner')->where('user_id='.$this->userId)->order('id desc')->select();
+        $this->assign('miners', $miners);
+        return $this->fetch();
+
+    }
+
+    public function minerdetail(){
+        $id = $this->request->param('id');
+        if(empty($id)){
+            abort(404);
+        }
+        $miner = Db::name('miner')->where('id='.$id.' AND user_id='.$this->userId)->find();
+        if(empty($miner)){
+            abort(404);
+        }
+        $status = $miner['status']==1?'已退出' :'挖矿中';
+        $day = bcdiv((strtotime(date('Y-m-d')) - strtotime(substr($miner['c_time'],0,10))), 86400);
+        //$currentIncome = bcmul(bcmul($day, bcdiv($miner['rate'], 100, 4), 4),$miner['money'],4);
+        //$this->assign(['miner'=>$miner, 'status'=>$status, 'day'=>$day, 'currentIncome'=>$currentIncome]);
+        $grades = Db::name('config')->field('id,content')->where('id in(30,31,32,33,34)')->order('id asc')->select();
+        $rate = $grades[$this->userInfo['grade']-1]['content'];
+        $this->assign(['miner'=>$miner, 'status'=>$status, 'day'=>$day,'rate'=>$rate]);
         return $this->fetch();
     }
 

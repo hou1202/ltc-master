@@ -23,8 +23,8 @@ class Test extends Command
     protected function execute(Input $input, Output $output)
     {
 
-        //清空所有用户今日锁仓收益
-        Db::name('user')->where('user_id>0')->update(['today_income'=>0, 'to_share_income'=>0]);
+        //清空所有用户今日理财、分享、矿机收益
+        Db::name('user')->where('user_id>0')->update(['today_income'=>0, 'to_share_income'=>0,'to_miner_income'=>0]);
 
         //计算用户锁仓收益、邀请收益
         //获取锁仓订单
@@ -140,12 +140,17 @@ class Test extends Command
         $config = Db::name('config')->field('content')->where('id in(30,31,32,33,34)')->order('id asc')->select();
         foreach($minerOrder as $k=>$miner){
 
-            //更新资金
+            //矿机收益
             $profit = bcmul($miner['number'],$config[$miner['grade']-1]['content'],4);
+            //用户记录中的总矿机收益和今日矿机总收益
             Db::name('user')->where('user_id='.$miner['user_id'])->update([
                 'ky_money'=> ['exp', 'ky_money+'.$profit],
-                'total_income'=>['exp', 'total_income+'.$profit],
-                'today_income'=>['exp', 'today_income+'.$profit],
+                'miner_income'=>['exp', 'miner_income+'.$profit],
+                'to_miner_income'=>['exp', 'to_miner_income+'.$profit],
+            ]);
+            //矿机记录中的矿机目前总收益
+            Db::name('miner')->where('id='.$miner['id'])->update([
+               'now_income'=>['exp', 'now_income+'.$profit],
             ]);
             //添加记录
             Db::name('money_log')

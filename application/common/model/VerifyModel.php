@@ -121,7 +121,7 @@ class VerifyModel
         }
         $res = explode(',', $results);
         return $res[0] == 0 ;*/
-        $text = '【LTC】您的验证码为：' . $verifyCode . '，请在10分钟内完成验证';
+        $text = '【USDT】您的验证码为：' . $verifyCode . '，请在10分钟内完成验证';
         $objecturl = 'https://dx.ipyy.net/sms.aspx?action=send&userid=&account='
             . ThinkConfig::get('sms_account')
             . '&password='

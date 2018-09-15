@@ -96,7 +96,8 @@
     });
     var verifyObj = {isCommit:false, url:'/index/verify/get', data:''};
     $('#verifyA').click(function(){
-        verifyObj.data = {mobile:$('#mobile').val(), type:0, captcha:'ltc_captcha'};
+        verifyObj.data = {mobile:$('#mobile').val(), type:0, c:'ltc_captcha'};
+        //console.log($('#verifyA').html());return false;
         //return console.log(verifyObj);
         getVerify('#verifyA', verifyObj);
     });
