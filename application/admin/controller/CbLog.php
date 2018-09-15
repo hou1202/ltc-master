@@ -76,7 +76,7 @@ class CbLog extends AdminCheckLoginController
             //购买矿机操作
             if($data['status'] == 2 && $data['is_kuang'] == 1){
                 //获取用户信息和父级树
-                $user = Db::name('user')->field('user_id,parent_id,parent_ids')->where('user_id='.$cbLog['user_id'])->find();
+                $user = Db::name('user')->field('user_id,parent_id,parent_ids,is_miner')->where('user_id='.$cbLog['user_id'])->find();
 
                 //矿机数量
                 $miner = intval($cbLog['count']/500);
@@ -87,15 +87,18 @@ class CbLog extends AdminCheckLoginController
                     'c_time'=>date('Y-m-d H:i:s'),
                     'e_time'=>date('Y-m-d H:i:s',time()+(365*24*60*60)),
                 ]);
+
                 //更新用户矿机数量
-                Db::name('user')->where('user_id='.$user['user_id'])
-                    ->update([
-                        'miner_num'=>['exp', 'miner_num+'.$miner],
-                    ]);
+                $miner_data = [];
+                $miner_data['miner_num'] = ['exp', 'miner_num+'.$miner];
+                if($user['is_miner'] === 1){
+                    $miner_data['is_miner'] = 2;
+                }
+                Db::name('user')->where('user_id='.$user['user_id'])->update($miner_data);
 
                 //如果是第一次购买矿机，更新父级直推活跃矿机用户和等级
-                $is_miner = Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
-                if(!$is_miner && !empty($user['parent_id'])){
+                //$is_miner = Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
+                if($user['is_miner'] == 1 && !empty($user['parent_id'])){
 
                     $parentUser = Db::name('user')->field('user_id,active_miner,grade')->where('user_id='.$user['parent_id'])->find();
                     switch($parentUser['active_miner']+1){
@@ -115,13 +118,11 @@ class CbLog extends AdminCheckLoginController
                             $grade = $parentUser['grade'];
                             break;
                     }
-                    Db::name('user')->where('user_id='.$user['parent_id'])->update([
+                    Db::name('user')->where('user_id='.$parentUser['user_id'])->update([
                         'active_miner'=>['exp', 'active_miner+1'],
                         'grade'=>$grade,
                     ]);
                 }
-
-
                 //判断父级树是否为空,计算用户返利
                 if($user['parent_ids'] != ''){
                     $parentIds = explode('|', substr($user['parent_ids'], 1, count($user['parent_ids'])-2));
