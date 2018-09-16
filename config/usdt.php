@@ -9,11 +9,11 @@ return [
         // 服务器地址
         'hostname'        => '93.90.74.21',
         // 数据库名
-        'database'        => 'usdtkj',
+        'database'        => 'ltc',
         // 用户名
-        'username'        => 'usdtkj',
+        'username'        => 'usdt',
         // 密码
-        'password'        => 'wBmiBMDBdhW8PX4P',
+        'password'        => 'WN3cHD36tis2yFj5',
         // 端口
         'hostport'        => '',
         // 连接dsn
