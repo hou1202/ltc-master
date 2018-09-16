@@ -3,6 +3,7 @@
 return [
     // 服务器地址
     'database'=> [
+
         // 数据库类型
         'type'            => 'mysql',
         // 服务器地址
