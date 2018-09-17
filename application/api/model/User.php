@@ -410,7 +410,6 @@ class User
                     ->setForegroundColor(['r'=>0,'g'=>0,'b'=>0,'a'=>1])
                     ->setMargin(16);
                 //先创建文件
-                var_dump($qrCode);die;
                 $path = ROOT_PATH . 'public' . DS . 'uploads'.DS.'qrcode'.DS.$fileName;
                 $qrCode->writeFile($path);
                 return $userId;
