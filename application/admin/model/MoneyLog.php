@@ -21,8 +21,9 @@ class MoneyLog extends BaseAdminModel
             ->field('m.id,m.money,m.sign,m.remark,m.c_time,u.mobile,u.real_name,u.invitation_code')
             ->where($where)
             ->join('p_user u', 'u.user_id=m.user_id')
-            ->limit($offset, $limit)
             ->order($order)
+            ->limit($offset, $limit)
+
             ->select();
     }
 

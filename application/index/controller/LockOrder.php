@@ -53,7 +53,7 @@ class LockOrder extends IndexController
         }*/
 
         /*if(Db::name('lock_order')->where('plan_id='.$plan['plan_id'].' AND user_id='.$this->userId)->count() > 0) {
-            return $this->jsonFail('该锁仓计划您已经购买过了');
+            return $this->jsonFail('该理财计划您已经购买过了');
         }*/
 
         $money = $this->requestData['money'];
@@ -63,7 +63,7 @@ class LockOrder extends IndexController
         $order = ['plan_id'=>$plan['plan_id'], 'rate'=>$plan['rate'], 'days'=>$plan['days'], 'money'=>$money, 'user_id'=>$this->userId,
             'income'=>$income, 'total_income'=>bcmul($income,$plan['days'],4), 'start_date'=>$startDate, 'end_date'=>$endDate
         ];
-        $log = ['user_id'=>$this->userId, 'money'=>$money, 'sign'=>'-', 'remark'=>'锁仓计划', 'type'=>3];
+        $log = ['user_id'=>$this->userId, 'money'=>$money, 'sign'=>'-', 'remark'=>'理财计划', 'type'=>3];
         $updateUser = ['ky_money'=>['exp','ky_money-'.$money],'gd_money'=>['exp', 'gd_money+'.$money]];
         if($this->userInfo['is_sc'] == 0){
             $updateUser['is_sc'] = 1;

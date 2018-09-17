@@ -17,7 +17,7 @@ class TbLog extends AdminCheckLoginController
     public function index()
     {
         if ($this->request->isPost()) {
-            $order = $this->request->post('sortField').' '.$this->request->post('sortType');
+            $order = $this->request->post('sortField').' '.$this->request->post('sortType','desc');
             $page = (int)$this->request->post('page');
             $limit = (int)$this->request->post('limit');
             $name = $this->request->post('searchName', '');
