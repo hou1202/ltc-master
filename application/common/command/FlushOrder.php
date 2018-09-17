@@ -23,10 +23,11 @@ class FlushOrder extends Command
 
     protected function execute(Input $input, Output $output)
     {
-        Db::name('user_sign')->insert([
+        /*测试
+         * Db::name('user_sign')->insert([
            'user_id'=>time(),
             'sign_date'=>date('Y-m-d'),
-        ]);
+        ]);*/
         CommonUtils::flushOrders();
     }
 
