@@ -46,6 +46,9 @@ class VerifyModel
         $cache = RedisCache::newInstance();
         //发送验证码
         $verifyCode = rand(100000, 999999);
+        var_dump($type);
+        var_dump($mobile);
+        var_dump($verifyCode);die;
         if ($this->sendVerify($mobile, $verifyCode)) {
             //记录验证码
             $logData['verify'] = $verifyCode;
