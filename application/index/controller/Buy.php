@@ -92,7 +92,7 @@ class Buy extends IndexController
     }
 
     public function trade(){
-        $orders = Db::name('order')->field('id,count')->where('status=1')->select();
+        $orders = Db::name('order')->field('id,count')->where('status=1')->order('id desc')->select();
         $price = Db::name('money_price')->where('is_del=0')->order('id desc')->value('price');
         $this->assign(['price'=>$price, 'orders'=>$orders]);
         return $this->fetch();
