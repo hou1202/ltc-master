@@ -118,7 +118,6 @@ header .top-list div:nth-child(2) {
   top: 50%;
   transform: translateY(-50%);
   width: 100%;
-  border-bottom: 1px solid #f2f2f2;
 }
 .app-content .list-bottom {
   display: flex;
