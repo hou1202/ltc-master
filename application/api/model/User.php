@@ -415,7 +415,7 @@ class User
                 var_dump(1);
                 //先创建文件
                 $path = ROOT_PATH . 'public' . DS . 'uploads'.DS.'qrcode'.DS.$fileName;
-                var_dump($path);
+                var_dump($path);die;
                 $qrCode->writeFile($path);
                 return $userId;
             }
