@@ -403,14 +403,19 @@ class User
                 }
 
                 $domain = ThinkConfig::get('upload_file_domain').'/index/index/register?invitation_code='.$code;
+                var_dump($domain);
                 $fileName = md5($domain).'.png';
+                var_dump($fileName);
                 $qrCode =  new QrCode();//创建生成二维码对象
+                var_dump($qrCode);
                 $qrCode->setText($domain)
                     ->setSize(224)
                     ->setForegroundColor(['r'=>0,'g'=>0,'b'=>0,'a'=>1])
                     ->setMargin(16);
+                var_dump(1);
                 //先创建文件
                 $path = ROOT_PATH . 'public' . DS . 'uploads'.DS.'qrcode'.DS.$fileName;
+                var_dump($path);
                 $qrCode->writeFile($path);
                 return $userId;
             }
