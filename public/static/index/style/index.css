@@ -18,10 +18,10 @@
 .hesd .top-header .swiper-container{
   height:4.45333333rem;
 }
-.hesd .top-header .swiper-container .swiper-wrapper .swiper-slide{
+.hesd .top-header .swiper-container .swiper-wrapper .swiper-wrapper{
   width:100% !important;
 }
-.hesd .top-header .swiper-container .swiper-wrapper .swiper-slide img{
+.hesd .top-header .swiper-container .swiper-wrapper .swiper-wrapper img{
   display:block;
   width:100%;
 }
