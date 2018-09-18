@@ -6,13 +6,13 @@ return [
         // 数据库类型
         'type'            => 'mysql',
         // 服务器地址
-        'hostname'        => '139.224.164.117',
+        'hostname'        => '93.90.74.21',
         // 数据库名
         'database'        => 'ltc',
         // 用户名
         'username'        => 'root',
         // 密码
-        'password'        => 'kejiXiaoji2016',
+        'password'        => '4ca8feee445f2e78',
         // 端口
         'hostport'        => '',
         // 连接dsn
