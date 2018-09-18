@@ -11,9 +11,9 @@ return [
         // 数据库名
         'database'        => 'ltc',
         // 用户名
-        'username'        => 'root',
+        'username'        => 'usdt',
         // 密码
-        'password'        => '4ca8feee445f2e78',
+        'password'        => 'WN3cHD36tis2yFj5',
         // 端口
         'hostport'        => '',
         // 连接dsn
