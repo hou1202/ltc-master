@@ -28,27 +28,27 @@ class Test extends Command
 
         //计算用户锁仓收益、邀请收益
         //获取锁仓订单
-        $incomeOrders = Db::name('lock_order')->field('id,user_id,income')
+        /*$incomeOrders = Db::name('lock_order')->field('id,user_id,income')
             ->where('status=0')
-            ->select();
-        /*$incomeOrders = Db::name('lock_order')->alias('l')->field('l.id,l.user_id,l.income,l.money,p.rate')
+            ->select();*/
+        $incomeOrders = Db::name('lock_order')->alias('l')->field('l.id,l.user_id,l.income,l.money,p.rate')
             ->join('p_lock_plan p','p.plan_id = l.plan_id')
             ->where('l.status=0')
-            ->select();*/
+            ->select();
 
         //遍历订单,计算用户理财收益
         foreach($incomeOrders as $v){
 
             //理财收益
-            //$lock_profit =bcmul(bcdiv($v['rate'],100,4),$v['money'],4);
+            $lock_profit =bcmul(bcdiv($v['rate'],100,4),$v['money'],4);
             Db::name('user')->where('user_id='.$v['user_id'])
                 ->update([
-                    'ky_money'=>['exp', 'ky_money+'.$v['income']],
-                    'total_income'=>['exp', 'total_income+'.$v['income']],
-                    'today_income'=>['exp', 'today_income+'.$v['income']],
+                    'ky_money'=>['exp', 'ky_money+'.$lock_profit],
+                    'total_income'=>['exp', 'total_income+'.$lock_profit],
+                    'today_income'=>['exp', 'today_income+'.$lock_profit],
                 ]);
             Db::name('money_log')
-                ->insert(['user_id'=> $v['user_id'], 'order_id'=>$v['id'], 'money'=>$v['income'], 'sign'=>'+', 'remark'=>'理财收益', 'type'=>4]);
+                ->insert(['user_id'=> $v['user_id'], 'order_id'=>$v['id'], 'money'=>$lock_profit, 'sign'=>'+', 'remark'=>'理财收益', 'type'=>4]);
 
         }
 

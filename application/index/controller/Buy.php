@@ -206,13 +206,13 @@ class Buy extends IndexController
             abort(404);
         }
         if ($order['sell_id']>0) {
-            $maijia = Db::name('user')->field('vip_number,user_id,alipay_number,bank_zh_name,bank_number,bank_id,real_name,mobile,c_time')->where('user_id=' . $order['sell_id'])->find();
+            $maijia = Db::name('user')->field('vip_number,user_id,alipay_number,bank_number,bank_id,real_name,mobile,c_time')->where('user_id=' . $order['sell_id'])->find();
             if ($maijia == null) {
                 abort(404);
             }
             $maijia['bank_name'] = Db::name('bank')->where('id=' . $maijia['bank_id'])->value('name');
         } else {
-            $maijia = ['vip_number'=>'', 'real_name'=>'', 'mobile'=>'', 'bank_name'=>'', 'bank_zh_name'=>'', 'alipay_number'=>'','bank_number'=>''];
+            $maijia = ['vip_number'=>'', 'real_name'=>'', 'mobile'=>'', 'bank_name'=>'', 'alipay_number'=>'','bank_number'=>''];
         }
         $time = 10800 - (time() - strtotime($order['ty_time']));
         $time > 0 && $time = CommonUtils::secToTime($time);

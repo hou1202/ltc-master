@@ -34,7 +34,7 @@ class UserValidate extends BaseValidate{
         ['real_name|开户姓名', 'require|length:1,50'],
         ['bank_zh_name|开户支行', 'require|length:1,50'],
         ['alipay_number|支付宝账号', 'length:1,50'],
-        ['nick_name|昵称', 'require|length:1,50'],
+        ['nick_name|昵称', 'length:1,50'],
     ];
 
     protected $scene = [
@@ -49,7 +49,7 @@ class UserValidate extends BaseValidate{
         'editpass' => ['mobile'=>'require|checkMobile|checkExistMobile', 'verify'=>'require|checkEditPasswordVerify', 'password'=>'require|length:6,16', 'password1'],
         'tradepass' => ['mobile'=>'require|checkMobile|checkExistMobile', 'verify'=>'require|checkEditPasswordVerify', 'trade_password'=>'require|length:6,16', 'trade_password1'],
         'updatepass' => ['new_password'=>'require', 'password'=>'require|length:6,16|checkNewPassword'],
-        'update' => ['mobile','bank_id','nick_name','real_name','bank_number','bank_zh_name','alipay_number','verify'=>'require|checkEditPasswordVerify'],
+        'update' => ['mobile','bank_id','nick_name','real_name','bank_number','alipay_number','verify'=>'require|checkEditPasswordVerify'],
     ];
 
     protected $message = [
