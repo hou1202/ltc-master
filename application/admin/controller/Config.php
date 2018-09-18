@@ -43,5 +43,19 @@ class Config extends AdminCheckLoginController
         return $this->fetch('');
     }
 
+    public function puts()
+    {
+        $configs = $this->model->where('id in(35)')->column('content', 'id');
+        $this->assign(['configs' => $configs]);
+        return $this->fetch('');
+    }
+
+    public function trades()
+    {
+        $configs = $this->model->where('id in(21)')->column('content', 'id');
+        $this->assign(['configs' => $configs]);
+        return $this->fetch('');
+    }
+
 
 }

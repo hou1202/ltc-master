@@ -199,9 +199,9 @@
             if(temp_amount>kyMoney){
                 temp_amount = kyMoney;
             }
-            console.log(accMul(temp_amount, 0.05));
-            $('#sxf').html(accMul(temp_amount, 0.05));
-            $('#dzje').html(accMul(temp_amount, 0.95));
+            console.log(accMul(temp_amount,0.05));
+            $('#sxf').html(accMul(temp_amount, {$rate}));
+            $('#dzje').html(accMul(temp_amount, (1-{$rate} )));
         }else{
             $('#sxf').html('00.00');
             $('#dzje').html('00.00');

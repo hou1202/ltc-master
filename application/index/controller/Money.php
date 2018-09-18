@@ -104,7 +104,10 @@ class Money extends IndexController
     public function apply()
     {
         $this->assign('b', Db::name('b')->where('id>0')->select());
+        $rate = Db::name('config')->where('id=35')->value('content');
+        $rate = bcdiv($rate,100,2);
         $this->assign('isOpen', Config::getIsOpen());
+        $this->assign('rate', $rate);
         return $this->fetch();
     }
 
@@ -121,10 +124,12 @@ class Money extends IndexController
             return $this->jsonFail('可用资产不足');
         }
         unset($data['mobile'], $data['verify'], $data['password']);
+        $rate = Db::name('config')->where('id=35')->value('content');
+        $rate = bcdiv($rate,100,2);
         $data['status'] = 1;
         $data['user_id'] = $this->userId;
-        $data['sxf_money'] = bcmul($data['count'], 0.05, 2);
-        $data['sj_money'] = bcmul($data['count'], 0.95, 2);
+        $data['sxf_money'] = bcmul($data['count'], $rate, 2);
+        $data['sj_money'] = bcsub($data['count'], $data['sxf_money'], 2);
         Db::startTrans();
         try {
             $id = Db::name('tb_log')->insert($data, false, true);
