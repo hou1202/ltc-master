@@ -84,3 +84,8 @@ div.list-title a:nth-child(4) {
   line-height:0.54rem;
   color:#808080;
 }
+.contentdetail img{
+  width:100%;
+  margin:0.10666666rem 0;
+}
+
