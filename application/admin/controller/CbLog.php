@@ -128,6 +128,7 @@ class CbLog extends AdminCheckLoginController
                     $parentIds = explode('|', substr($user['parent_ids'], 1, count($user['parent_ids'])-2));
                     //获取等级收益利率
                     $rate = Db::name('config')->field('content')->where('id','in',[17,18,19,20,23,24,25,26,27,28])->order('id asc')->select();
+                    $sup_cont = Db::name('config')->field('content')->where('id','in',[36,37,38,39])->order('id asc')->select();
                     foreach($parentIds as $key =>$parent){
                         //计算收益
                         $parentIncome = bcmul($cbLog['count'],bcdiv($rate[$key]['content'],100,4),4);
@@ -143,12 +144,22 @@ class CbLog extends AdminCheckLoginController
                         }
 
                         //计算是否是用户超级返
-                        $sup_user = Db::name('user')->field('id,active_miner,miner_count')->where('id='.$parent)->find();
+                        if($sup_cont[0]['content'] > 0){
+                            $sup_user = Db::name('user')->field('user_id,active_miner,miner_count,is_team')->where('user_id='.$parent)->find();
+                            if($sup_user['is_team'] == 1 && $sup_user['active_miner'] == $sup_cont[1]['content'] && $sup_user['miner_count'] > $sup_cont[2]['content']){
+                                Db::name('user')->where('user_id=' . $sup_user['id'])->update([
+                                    'ky_money'=>['exp', 'ky_money+'.$sup_cont[3]['content']],
+                                    'is_team'=>2,
+                                ]);
+                                Db::name('money_log')
+                                    ->insert(['user_id'=> $sup_user['user_id'], 'money'=>$sup_cont[3]['content'], 'sign'=>'+', 'remark'=>'超级返利', 'type'=>2]);
+                            }
+                        }
+
                     }
                 }
 
             }
-
 
             if($this->modelFactory->edit($data)){
                 return $this->jsonSuccess('修改成功');
