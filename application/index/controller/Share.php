@@ -22,8 +22,8 @@ class Share extends IndexController
     {
         $domain = Config::get('upload_file_domain').'/index/index/register?invitation_code='.$this->userInfo['invitation_code'];
         $fileName = md5($domain).'.png';
-        $android = Db::name('config')->where('id=4')->value('content');
-        $this->assign('android',$android);
+        $config = Db::name('config')->field('content')->where('id in(4,17,18)')->order('id asc')->select();
+        $this->assign('config',$config);
         $this->assign('qrcode', '/uploads/qrcode/'.$fileName);
         return $this->fetch();
     }
