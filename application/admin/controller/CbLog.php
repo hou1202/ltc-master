@@ -97,7 +97,6 @@ class CbLog extends AdminCheckLoginController
                 Db::name('user')->where('user_id='.$user['user_id'])->update($miner_data);
 
                 //如果是第一次购买矿机，更新父级直推活跃矿机用户和等级
-                //$is_miner = Db::name('miner')->field('id')->where('user_id='.$user['user_id'])->find();
                 if($user['is_miner'] == 1 && !empty($user['parent_id'])){
 
                     $parentUser = Db::name('user')->field('user_id,active_miner,grade')->where('user_id='.$user['parent_id'])->find();
@@ -123,6 +122,7 @@ class CbLog extends AdminCheckLoginController
                         'grade'=>$grade,
                     ]);
                 }
+
                 //判断父级树是否为空,计算用户返利
                 if($user['parent_ids'] != ''){
                     $parentIds = explode('|', substr($user['parent_ids'], 1, count($user['parent_ids'])-2));
@@ -136,10 +136,14 @@ class CbLog extends AdminCheckLoginController
                                 'share_income' => ['exp', 'share_income+' .$parentIncome],
                                 'to_share_income' => ['exp', 'to_share_income+' . $parentIncome],
                                 'ky_money'=>['exp', 'ky_money+'.$parentIncome],
+                                'miner_count'=>['exp','miner_count+'.$miner],
                             ]);
                             Db::name('money_log')
                                 ->insert(['user_id'=> $parent,'order_id'=>$miner_id, 'money'=>$parentIncome, 'sign'=>'+', 'remark'=>'好友收益', 'type'=>6]);
                         }
+
+                        //计算是否是用户超级返
+                        $sup_user = Db::name('user')->field('id,active_miner,miner_count')->where('id='.$parent)->find();
                     }
                 }
 
